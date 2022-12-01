@@ -7,5 +7,6 @@
     <color name="colorMorado">#1E1A49</color>
     <color name="colorBlanco">#F4F1F8</color>
     <color name="colorAzul">#002E58</color>
-    <color name="colorGris">#616595</color>
+    <color name="colorGris">#171515</color>
+    <color name="colorGrisOscuro">#333131</color>
 </resources>
