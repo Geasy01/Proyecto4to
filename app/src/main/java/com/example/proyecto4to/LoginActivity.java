@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private RequestQueue nQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

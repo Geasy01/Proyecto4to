@@ -1,18 +1,24 @@
 package com.example.proyecto4to.Modelos;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Register {
     private final int status;
     private final String message;
-    private  final String error;
-    private final List<data> data;
 
-    public Register(int status, String message, String error, List<com.example.proyecto4to.Modelos.data> data) {
+    @SerializedName("error")
+    private final List<ErrorRegister> error;
+
+    @SerializedName("data")
+    private final List<DataUser> dataUser;
+
+    public Register(int status, String message, List<ErrorRegister> error, List<DataUser> dataUser) {
         this.status = status;
         this.message = message;
         this.error = error;
-        this.data = data;
+        this.dataUser = dataUser;
     }
 
     public int getStatus() {
@@ -23,11 +29,11 @@ public class Register {
         return message;
     }
 
-    public String getError() {
+    public List<ErrorRegister> getError() {
         return error;
     }
 
-    public List<com.example.proyecto4to.Modelos.data> getData() {
-        return data;
+    public List<DataUser> getData() {
+        return dataUser;
     }
 }

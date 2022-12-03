@@ -9,7 +9,6 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="32dp">
 
-
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="599dp"
@@ -171,7 +170,7 @@
         app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
     <EditText
-        android:id="@+id/no_telefono"
+        android:id="@+id/inputPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -200,10 +199,10 @@
         android:background="@drawable/btn_bg"
         android:textColor="@color/colorWhite"
         android:text="Registrarme"
-        app:layout_constraintEnd_toEndOf="@+id/no_telefono"
+        app:layout_constraintEnd_toEndOf="@+id/inputPhone"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/no_telefono"
-        app:layout_constraintTop_toBottomOf="@+id/no_telefono" />
+        app:layout_constraintStart_toStartOf="@+id/inputPhone"
+        app:layout_constraintTop_toBottomOf="@+id/inputPhone" />
 
     <TextView
         android:id="@+id/alreadyHaveAccount"
