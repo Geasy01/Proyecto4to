@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Modelos.ErrorRegister;
 import com.example.proyecto4to.Modelos.Register;
 import com.example.proyecto4to.Modelos.SingletonRequest;
 import com.google.gson.Gson;
@@ -30,6 +31,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText inputUsername, ap_paterno, ap_materno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
     Button btnRegister;
     TextView alreadyHaveAccount;
+    Register register;
+    ErrorRegister errorRegister;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +53,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btnRegister.setOnClickListener(this);
         alreadyHaveAccount.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view.getId() == R.id.alreadyHaveAccount)
-            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
-
-
-        if(view.getId() == R.id.btnRegister)
-            if(inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
-                registerUser();
-                startActivity(new Intent(RegisterActivity.this,VerificarCuentaActivity.class));
-            }
-
-        else {
-
-            }
     }
 
     public void registerUser()
@@ -90,11 +77,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
-                final Register register = gson.fromJson(response.toString(), Register.class);
+                final Gson nGson = new Gson();
+                register = gson.fromJson(response.toString(), Register.class);
+                errorRegister = nGson.fromJson(response.toString(), ErrorRegister.class);
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 builder.setTitle("Main")
-                        .setMessage(""+ register.getMessage()+ "" + register.getError())
+                        .setMessage(""+register.getError())
                         .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -108,10 +98,62 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.i("errorPeticion", error.toString());
             }
         });
 
         nQueue.add(registerUser);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.alreadyHaveAccount)
+            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+
+
+        if(view.getId() == R.id.btnRegister)
+            if(! inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setTitle("Password incorrecto")
+                        .setMessage("Las contraseñas no coinciden. Intenta nuevamente")
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+
+        else if(inputPassword.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().length() > 30 || inputPassword.getText().toString().trim().length() < 8) {
+            inputPassword.setError(""+errorRegister.getPassword());
+        }
+
+        else if(inputUsername.getText().toString().trim().isEmpty() || inputUsername.getText().toString().trim().length()>20) {
+            inputUsername.setError(""+errorRegister.getName());
+        }
+
+        else if(ap_paterno.getText().toString().trim().isEmpty() || ap_paterno.getText().toString().trim().length()>20) {
+            ap_paterno.setError(""+errorRegister.getAp_paterno());
+        }
+
+        else if(ap_materno.getText().toString().trim().isEmpty() || ap_materno.getText().toString().trim().length()>20) {
+            ap_materno.setError(""+errorRegister.getAp_materno());
+        }
+
+        else if(inputPhone.getText().toString().trim().isEmpty() || inputPhone.getText().toString().trim().length()>10) {
+            inputPhone.setError(""+errorRegister.getPhone_number());
+        }
+
+        else if(inputEmail.getText().toString().trim().isEmpty() || inputEmail.getText().toString().trim().length()>70) {
+            inputEmail.setError(""+errorRegister.getEmail());
+        }
+
+        else {
+            registerUser();
+            startActivity(new Intent(RegisterActivity.this,VerificarCuentaActivity.class));
+        }
     }
 }
