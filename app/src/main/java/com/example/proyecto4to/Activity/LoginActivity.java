@@ -1,4 +1,4 @@
-package com.example.proyecto4to;
+package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
+import com.example.proyecto4to.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }

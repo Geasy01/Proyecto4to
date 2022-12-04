@@ -1,10 +1,13 @@
-package com.example.proyecto4to;
+package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
+import com.example.proyecto4to.Activity.LoginActivity;
+import com.example.proyecto4to.R;
 
 public class splash extends AppCompatActivity {
 
@@ -21,7 +24,7 @@ public class splash extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         }.start();
     }

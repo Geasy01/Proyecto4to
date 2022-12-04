@@ -1,8 +1,10 @@
-package com.example.proyecto4to;
+package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.proyecto4to.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override

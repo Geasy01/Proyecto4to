@@ -1,4 +1,4 @@
-package com.example.proyecto4to;
+package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Modelos.ErrorRegister;
 import com.example.proyecto4to.Modelos.Register;
 import com.example.proyecto4to.Modelos.SingletonRequest;
+import com.example.proyecto4to.R;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -76,14 +77,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
-                final Gson nGson = new Gson();
+                //final Gson nGson = new Gson();
                 register = gson.fromJson(response.toString(), Register.class);
-                errorRegister = nGson.fromJson(response.toString(), ErrorRegister.class);
+                //errorRegister = nGson.fromJson(response.toString(), ErrorRegister.class);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("errorPeticion", error.toString());
+                error.printStackTrace();
             }
         });
         nQueue.add(registerUser);
@@ -94,8 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (view.getId() == R.id.alreadyHaveAccount)
             startActivity(new Intent(this, LoginActivity.class));
 
-
-        if (view.getId() == R.id.btnRegister)
+        if (view.getId() == R.id.btnRegister) {
             if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 builder.setTitle("Password incorrecto")
@@ -111,21 +112,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 alertDialog.show();
 
             } else if (inputPassword.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().length() > 30 || inputPassword.getText().toString().trim().length() < 8) {
-                inputPassword.setError("" + errorRegister.getPassword());
+                inputPassword.setError("No se puede");
             } else if (inputUsername.getText().toString().trim().isEmpty() || inputUsername.getText().toString().trim().length() > 20) {
-                inputUsername.setError("" + errorRegister.getName());
+                inputUsername.setError("No se puede");
             } else if (inputApaterno.getText().toString().trim().isEmpty() || inputApaterno.getText().toString().trim().length() > 20) {
-                inputApaterno.setError("" + errorRegister.getAp_paterno());
+                inputApaterno.setError("No se puede");
             } else if (inputAmaterno.getText().toString().trim().isEmpty() || inputAmaterno.getText().toString().trim().length() > 20) {
-                inputAmaterno.setError("" + errorRegister.getAp_materno());
+                inputAmaterno.setError("No se puede");
             } else if (inputPhone.getText().toString().trim().isEmpty() || inputPhone.getText().toString().trim().length() > 10) {
-                inputPhone.setError("" + errorRegister.getPhone_number());
+                inputPhone.setError("No se puede");
             } else if (inputEmail.getText().toString().trim().isEmpty() || inputEmail.getText().toString().trim().length() > 70) {
-                inputEmail.setError("" + errorRegister.getEmail());
-            } else if(register.getStatus() == 200){
+                inputEmail.setError("No se puede");
+            } else {
                 registerUser();
                 startActivity(new Intent(this, VerificarCuentaActivity.class));
             }
+        }
     }
 }
+
+
 
