@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,9 +33,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText inputUsername, inputApaterno, inputAmaterno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
     Button btnRegister;
     TextView alreadyHaveAccount;
-    Register register;
-    ErrorRegister errorRegister;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +75,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
-                //final Gson nGson = new Gson();
-                register = gson.fromJson(response.toString(), Register.class);
-                //errorRegister = nGson.fromJson(response.toString(), ErrorRegister.class);
+                final Register register = gson.fromJson(response.toString(), Register.class);
+
+                if(register.getStatus() == 200) {
+                    Toast.makeText(getApplicationContext(), "" + register.getMessage(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, VerificarCuentaActivity.class));
+                }
+
+                else {
+                    Toast.makeText(getApplicationContext(), "Ocurrió un error al registrarse. Por favor inténtelo en unos momentos.", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -111,25 +116,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
-            } else if (inputPassword.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().length() > 30 || inputPassword.getText().toString().trim().length() < 8) {
-                inputPassword.setError("No se puede");
-            } else if (inputUsername.getText().toString().trim().isEmpty() || inputUsername.getText().toString().trim().length() > 20) {
-                inputUsername.setError("No se puede");
-            } else if (inputApaterno.getText().toString().trim().isEmpty() || inputApaterno.getText().toString().trim().length() > 20) {
-                inputApaterno.setError("No se puede");
-            } else if (inputAmaterno.getText().toString().trim().isEmpty() || inputAmaterno.getText().toString().trim().length() > 20) {
-                inputAmaterno.setError("No se puede");
-            } else if (inputPhone.getText().toString().trim().isEmpty() || inputPhone.getText().toString().trim().length() > 10) {
-                inputPhone.setError("No se puede");
-            } else if (inputEmail.getText().toString().trim().isEmpty() || inputEmail.getText().toString().trim().length() > 70) {
-                inputEmail.setError("No se puede");
+            } else if (inputPassword.getText().toString().trim().isEmpty()) {
+                inputPassword.setError("El campo contraseña es obligatorio.");
+            } else if(inputPassword.getText().toString().trim().length() > 30) {
+                inputPassword.setError("El campo contraseña debe tener un máximo de 30 caracteres.");
+            } else if(inputPassword.getText().toString().trim().length() < 8) {
+                inputPassword.setError("El campo contraseña debe tener un mínimo de 8 caracteres.");
+            } else if (inputUsername.getText().toString().trim().isEmpty()) {
+                inputUsername.setError("El campo nombre es obligatorio.");
+            } else if (inputUsername.getText().toString().trim().length() > 25) {
+                inputUsername.setError("El campo nombre debe tener un máximo de 25 caracteres.");
+            } else if (inputApaterno.getText().toString().trim().isEmpty()) {
+                inputApaterno.setError("El campo apellido paterno es obligatorio.");
+            } else if(inputApaterno.getText().toString().trim().length() > 25) {
+                inputApaterno.setError("El campo apellido paterno debe tener un máximo de 25 caracteres.");
+            } else if (inputAmaterno.getText().toString().trim().isEmpty()) {
+                inputAmaterno.setError("El campo apellido materno es obligatorio.");
+            } else if(inputAmaterno.getText().toString().trim().length() > 20) {
+                inputAmaterno.setError("El campo apellido materno debe tener un máximo de 25 caracteres.");
+            } else if (inputPhone.getText().toString().trim().isEmpty()) {
+                inputPhone.setError("El campo teléfono es obligatorio.");
+            } else if(inputPhone.getText().toString().trim().length() > 10) {
+                inputPhone.setError("El campo teléfono debe tener un máximo de 10 caracteres.");
+            } else if(inputPhone.getText().toString().trim().length() < 10) {
+                inputPhone.setError("El campo teléfono debe tener un mínimo de 10 caracteres.");
+            } else if (inputEmail.getText().toString().trim().isEmpty()) {
+                inputEmail.setError("El campo correo electrónico es obligatorio.");
+            } else if (inputEmail.getText().toString().trim().length() > 70) {
+                inputEmail.setError("El campo correo electrónico debe tener un máximo de 70 caracteres.");
             } else {
-                registerUser();
-                startActivity(new Intent(this, VerificarCuentaActivity.class));
+                    registerUser();
             }
         }
     }
 }
-
-
-

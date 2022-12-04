@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/inputPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -105,7 +105,7 @@
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="Ingresa tu contraseña"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -113,14 +113,14 @@
         android:paddingBottom="10dp"
         android:textColor="@color/colorAzul"
         android:textColorHint="@color/colorAzul"
-        app:layout_constraintBottom_toTopOf="@+id/btnlogin"
-        app:layout_constraintEnd_toEndOf="@+id/inputEmail"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@+id/inputMail"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/inputEmail"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        app:layout_constraintStart_toStartOf="@+id/inputMail"
+        app:layout_constraintTop_toBottomOf="@+id/inputMail" />
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/inputMail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -145,16 +145,16 @@
 
 
     <Button
-        android:id="@+id/btnlogin"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_bg"
         android:textColor="@color/colorWhite"
         android:text="Iniciar sesión"
-        app:layout_constraintEnd_toEndOf="@+id/inputPassword"
-        app:layout_constraintStart_toStartOf="@+id/inputPassword"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/inputPass"
+        app:layout_constraintStart_toStartOf="@+id/inputPass"
+        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -164,10 +164,10 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/btnlogin"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnlogin"
-        app:layout_constraintTop_toBottomOf="@+id/btnlogin">
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin">
 
         <TextView
             android:layout_width="wrap_content"

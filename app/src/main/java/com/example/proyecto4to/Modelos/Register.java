@@ -10,16 +10,12 @@ public class Register {
     private final String message;
 
     @SerializedName("error")
-    private final List<ErrorRegister> error;
+    private final ArrayList<ErrorRegister> error;
 
-    @SerializedName("data")
-    private final ArrayList<DataUser> dataUser;
-
-    public Register(int status, String message, List<ErrorRegister> error, ArrayList<DataUser> dataUser) {
+    public Register(int status, String message, ArrayList<ErrorRegister> error) {
         this.status = status;
         this.message = message;
         this.error = error;
-        this.dataUser = dataUser;
     }
 
     public int getStatus() {
@@ -30,11 +26,7 @@ public class Register {
         return message;
     }
 
-    public List<ErrorRegister> getError() {
+    public ArrayList<ErrorRegister> getError() {
         return error;
-    }
-
-    public List<DataUser> getData() {
-        return dataUser;
     }
 }

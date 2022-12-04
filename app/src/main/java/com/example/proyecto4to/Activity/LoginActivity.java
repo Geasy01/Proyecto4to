@@ -5,25 +5,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.example.proyecto4to.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RequestQueue nQueue;
+    TextView inputMail, inputPass;
+    Button btnLogin;
+    TextView textViewSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        TextView btn=findViewById(R.id.textViewSignUp);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+
+        inputMail = (TextView) findViewById(R.id.inputMail);
+        inputPass = (TextView) findViewById(R.id.inputPass);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
+
+        btnLogin.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.btnLogin)
+        {
+
+        }
+
+        if(view.getId() == R.id.textViewSignUp)
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }
