@@ -3,7 +3,6 @@ package com.example.proyecto4to.Modelos;
 public class DataUser {
     public final String name;
     public final String email;
-    public final String password;
     public final String ap_paterno;
     public final String ap_materno;
     public final String phone_number;
@@ -11,10 +10,9 @@ public class DataUser {
     public final String created_at;
     public final int id;
 
-    public DataUser(String name, String email, String password, String ap_paterno, String ap_materno, String phone_number, String updated_at, String created_at, int id) {
+    public DataUser(String name, String email, String ap_paterno, String ap_materno, String phone_number, String updated_at, String created_at, int id) {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
         this.phone_number = phone_number;
@@ -29,10 +27,6 @@ public class DataUser {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getAp_paterno() {

@@ -28,7 +28,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RequestQueue nQueue;
-    EditText inputUsername, ap_paterno, ap_materno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
+    EditText inputUsername, inputApaterno, inputAmaterno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
     Button btnRegister;
     TextView alreadyHaveAccount;
     Register register;
@@ -41,8 +41,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         inputUsername = (EditText) findViewById(R.id.inputUsername);
-        ap_paterno = (EditText) findViewById(R.id.ap_paterno);
-        ap_materno = (EditText) findViewById(R.id.ap_materno);
+        inputApaterno = (EditText) findViewById(R.id.inputApaterno);
+        inputAmaterno = (EditText) findViewById(R.id.inputApmaterno);
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         inputPassword = (EditText) findViewById(R.id.inputPassword);
         inputConfirmPassword = (EditText) findViewById(R.id.inputConfirmPassword);
@@ -55,19 +55,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         alreadyHaveAccount.setOnClickListener(this);
     }
 
-    public void registerUser()
-    {
-        String url="https://cleanbotapi.live/api/v1/register";
+    public void registerUser() {
+        String url = "https://cleanbotapi.live/api/v1/register";
 
         JSONObject jsonBody = new JSONObject();
 
         try {
-            jsonBody.put("name", ""+inputUsername.getText());
-            jsonBody.put("ap_paterno", ""+ap_paterno.getText());
-            jsonBody.put("ap_materno", ""+ap_materno.getText());
-            jsonBody.put("email", ""+ap_paterno.getText());
-            jsonBody.put("phone_number", ""+inputPhone.getText());
-            jsonBody.put("password", ""+inputPassword.getText());
+            jsonBody.put("name", "" + inputUsername.getText());
+            jsonBody.put("ap_paterno", "" + inputApaterno.getText());
+            jsonBody.put("ap_materno", "" + inputAmaterno.getText());
+            jsonBody.put("email", "" + inputEmail.getText());
+            jsonBody.put("phone_number", "" + inputPhone.getText());
+            jsonBody.put("password", "" + inputPassword.getText());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -80,20 +79,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 final Gson nGson = new Gson();
                 register = gson.fromJson(response.toString(), Register.class);
                 errorRegister = nGson.fromJson(response.toString(), ErrorRegister.class);
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                builder.setTitle("Main")
-                        .setMessage(""+register.getError())
-                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -101,18 +86,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Log.i("errorPeticion", error.toString());
             }
         });
-
         nQueue.add(registerUser);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.alreadyHaveAccount)
-            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+        if (view.getId() == R.id.alreadyHaveAccount)
+            startActivity(new Intent(this, LoginActivity.class));
 
 
-        if(view.getId() == R.id.btnRegister)
-            if(! inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
+        if (view.getId() == R.id.btnRegister)
+            if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 builder.setTitle("Password incorrecto")
                         .setMessage("Las contraseñas no coinciden. Intenta nuevamente")
@@ -125,35 +109,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+
+            } else if (inputPassword.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().length() > 30 || inputPassword.getText().toString().trim().length() < 8) {
+                inputPassword.setError("" + errorRegister.getPassword());
+            } else if (inputUsername.getText().toString().trim().isEmpty() || inputUsername.getText().toString().trim().length() > 20) {
+                inputUsername.setError("" + errorRegister.getName());
+            } else if (inputApaterno.getText().toString().trim().isEmpty() || inputApaterno.getText().toString().trim().length() > 20) {
+                inputApaterno.setError("" + errorRegister.getAp_paterno());
+            } else if (inputAmaterno.getText().toString().trim().isEmpty() || inputAmaterno.getText().toString().trim().length() > 20) {
+                inputAmaterno.setError("" + errorRegister.getAp_materno());
+            } else if (inputPhone.getText().toString().trim().isEmpty() || inputPhone.getText().toString().trim().length() > 10) {
+                inputPhone.setError("" + errorRegister.getPhone_number());
+            } else if (inputEmail.getText().toString().trim().isEmpty() || inputEmail.getText().toString().trim().length() > 70) {
+                inputEmail.setError("" + errorRegister.getEmail());
+            } else if(register.getStatus() == 200){
+                registerUser();
+                startActivity(new Intent(this, VerificarCuentaActivity.class));
             }
-
-        else if(inputPassword.getText().toString().trim().isEmpty() || inputPassword.getText().toString().trim().length() > 30 || inputPassword.getText().toString().trim().length() < 8) {
-            inputPassword.setError(""+errorRegister.getPassword());
-        }
-
-        else if(inputUsername.getText().toString().trim().isEmpty() || inputUsername.getText().toString().trim().length()>20) {
-            inputUsername.setError(""+errorRegister.getName());
-        }
-
-        else if(ap_paterno.getText().toString().trim().isEmpty() || ap_paterno.getText().toString().trim().length()>20) {
-            ap_paterno.setError(""+errorRegister.getAp_paterno());
-        }
-
-        else if(ap_materno.getText().toString().trim().isEmpty() || ap_materno.getText().toString().trim().length()>20) {
-            ap_materno.setError(""+errorRegister.getAp_materno());
-        }
-
-        else if(inputPhone.getText().toString().trim().isEmpty() || inputPhone.getText().toString().trim().length()>10) {
-            inputPhone.setError(""+errorRegister.getPhone_number());
-        }
-
-        else if(inputEmail.getText().toString().trim().isEmpty() || inputEmail.getText().toString().trim().length()>70) {
-            inputEmail.setError(""+errorRegister.getEmail());
-        }
-
-        else {
-            registerUser();
-            startActivity(new Intent(RegisterActivity.this,VerificarCuentaActivity.class));
-        }
     }
 }
+

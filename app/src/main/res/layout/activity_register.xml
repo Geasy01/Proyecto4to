@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/ap_paterno"
+        android:id="@+id/inputApaterno"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/ap_materno"
+        android:id="@+id/inputApmaterno"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -98,7 +98,7 @@
         android:paddingBottom="10dp"
         android:textColor="@color/colorAzul"
         android:textColorHint="@color/colorAzul"
-        app:layout_constraintEnd_toEndOf="@+id/ap_paterno"
+        app:layout_constraintEnd_toEndOf="@+id/inputApaterno"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -120,10 +120,10 @@
         android:paddingBottom="10dp"
         android:textColor="@color/colorAzul"
         android:textColorHint="@color/colorAzul"
-        app:layout_constraintEnd_toEndOf="@+id/ap_materno"
+        app:layout_constraintEnd_toEndOf="@+id/inputApmaterno"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ap_materno"
-        app:layout_constraintTop_toBottomOf="@+id/ap_materno" />
+        app:layout_constraintStart_toStartOf="@+id/inputApmaterno"
+        app:layout_constraintTop_toBottomOf="@+id/inputApmaterno" />
 
     <EditText
         android:id="@+id/inputPassword"

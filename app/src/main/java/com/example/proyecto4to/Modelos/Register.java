@@ -2,6 +2,7 @@ package com.example.proyecto4to.Modelos;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Register {
@@ -12,9 +13,9 @@ public class Register {
     private final List<ErrorRegister> error;
 
     @SerializedName("data")
-    private final List<DataUser> dataUser;
+    private final ArrayList<DataUser> dataUser;
 
-    public Register(int status, String message, List<ErrorRegister> error, List<DataUser> dataUser) {
+    public Register(int status, String message, List<ErrorRegister> error, ArrayList<DataUser> dataUser) {
         this.status = status;
         this.message = message;
         this.error = error;
