@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gris">
+
+    <TextView
+        android:id="@+id/vefmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verifica el correo que proporcionaste "
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168" />
+
+
+    <TextView
+        android:id="@+id/texto_verficar"
+        android:layout_width="212dp"
+        android:layout_height="80dp"
+        android:text="Presiona debajo cuando tu correo electronico haya sido verificado"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="289dp" />
+
+    <Button
+        android:id="@+id/boton_verificar"
+        android:layout_width="115dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="159dp"
+        android:background="@drawable/btn_bg"
+        android:shadowColor="@color/colorNuevoAzul"
+        android:text="Verificar"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.596" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
