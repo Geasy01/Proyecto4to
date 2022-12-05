@@ -43,8 +43,6 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
 
         Bundle getSignedUrl = this.getIntent().getExtras();
         urlUnsigned = getSignedUrl.getString("url");
-
-        getUrlSigned();
     }
 
     public void getUrlSigned() {
@@ -107,6 +105,8 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
             if(inputCode.getText().toString().trim().isEmpty()) {
                 inputCode.setError("El campo código es obligatorio");
             } else {
+                getUrlSigned();
+
                 if(newUrl != null)
                 sendCode();
             }
