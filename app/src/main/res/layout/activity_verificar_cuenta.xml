@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gris"
+    android:background="@drawable/bb"
     tools:context=".Activity.VerificarCuentaActivity">
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="599dp"
+        android:background="@drawable/custom_fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/verficar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Verfica tu cuenta"
+        android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.07" />
 
     <TextView
         android:id="@+id/textView"
@@ -28,12 +37,14 @@
         android:layout_height="wrap_content"
         android:text="@string/verificarCorreo"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorNuevoAzul"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verficar" />
+        app:layout_constraintTop_toBottomOf="@+id/verficar"
+        app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/textView2"
@@ -44,7 +55,7 @@
         android:layout_marginBottom="26dp"
         android:text="@string/verificarTelefono"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorNuevoAzul"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +69,7 @@
         android:id="@+id/inputCode"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlack"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="  __ __ __ __  "
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorNuevoAzul"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,17 +94,14 @@
         android:id="@+id/btnSendCode"
         android:layout_width="115dp"
         android:layout_height="61dp"
-        android:layout_marginStart="158dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="159dp"
+        android:background="@drawable/btn_bg"
         android:text="Enviar"
         android:textColor="@color/colorWhite"
-        android:background="@drawable/btn_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.622" />
+        app:layout_constraintVertical_bias="0.68" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
