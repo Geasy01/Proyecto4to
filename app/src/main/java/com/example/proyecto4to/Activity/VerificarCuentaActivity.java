@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
     EditText inputCode;
     Button btnSendCode;
     String urlUnsigned = null, newUrl = null;
+    TextView siguiente;
     private RequestQueue nQueue;
 
     @Override
@@ -43,6 +45,8 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
 
         Bundle getSignedUrl = this.getIntent().getExtras();
         urlUnsigned = getSignedUrl.getString("url");
+
+        siguiente = (TextView) findViewById(R.id.siguiente);
     }
 
     public void getUrlSigned() {
@@ -110,6 +114,10 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
                 if(newUrl != null)
                 sendCode();
             }
+        }
+
+        if(view.getId() == R.id.siguiente){
+            startActivity(new Intent(this, AdafruitLoginActivity.class ));
         }
     }
 }
