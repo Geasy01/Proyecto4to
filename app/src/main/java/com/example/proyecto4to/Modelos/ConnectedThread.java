@@ -1,20 +1,18 @@
 package com.example.proyecto4to.Modelos;
 
 import android.bluetooth.BluetoothSocket;
+import android.os.Handler;
 import android.os.SystemClock;
-
 import com.example.proyecto4to.Activity.MainActivity;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.Handler;
 
 public class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private final InputStream mmInStream;
     private final OutputStream mmOutStream;
-    private final Handler mHandler;
+    private final android.os.Handler mHandler;
 
     public ConnectedThread(BluetoothSocket socket, Handler handler) {
         mmSocket = socket;
@@ -44,15 +42,14 @@ public class ConnectedThread extends Thread {
                     SystemClock.sleep(100);
                     bytes = mmInStream.available();
                     bytes = mmInStream.read(buffer, 0, bytes);
-                    mHandler.obtainMessage(MainActivity.MESSAGE_READ, bytes, -1, buffer);
-                    .sendToTarget();
+                    mHandler.obtainMessage(MainActivity.MESSAGE_READ, bytes, -1, buffer)
+                            .sendToTarget();
                 }
-
             } catch (IOException e) {
-
+                e.printStackTrace();
+                break;
             }
         }
-
     }
 
     public void write(String input) {
