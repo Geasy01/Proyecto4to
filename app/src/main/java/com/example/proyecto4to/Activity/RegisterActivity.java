@@ -33,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText inputUsername, inputApaterno, inputAmaterno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
     Button btnRegister;
     TextView alreadyHaveAccount;
+    String signedUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +77,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
                 final Register register = gson.fromJson(response.toString(), Register.class);
+                signedUrl = register.getUrl();
 
                 if(register.getStatus() == 200) {
                     Toast.makeText(getApplicationContext(), "" + register.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, VerificarCuentaActivity.class));
+
+                    Intent sendSigned = new Intent(RegisterActivity.this, VerificarCuentaActivity.class);
+                    sendSigned.putExtra("url", signedUrl);
+                    startActivity(sendSigned);
+                    finish();
                 }
 
                 else {
@@ -89,7 +96,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("errorPeticion", error.toString());
                 error.printStackTrace();
             }
         });

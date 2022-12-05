@@ -11,13 +11,13 @@
         android:id="@+id/verficar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verfica tu cuenta "
+        android:text="Verfica tu cuenta"
         android:textColor="@color/colorWhite"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.168" />
@@ -26,20 +26,24 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Hemos enviado un código al correo proporcionado!"
+        android:text="@string/verificarCorreo"
+        android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="15sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="179dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verficar" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="343dp"
-        android:layout_height="29dp"
+        android:layout_height="37dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="26dp"
-        android:text="  Ingresa el código que hemos enviado aquí debajo"
+        android:text="@string/verificarTelefono"
+        android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -51,10 +55,9 @@
         app:layout_constraintVertical_bias="0.433" />
 
     <EditText
-        android:id="@+id/rayas"
-        android:layout_width="wrap_content"
+        android:id="@+id/inputCode"
+        android:layout_width="102dp"
         android:layout_height="wrap_content"
-        android:text="               "
         android:textColor="@color/colorWhite"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +80,7 @@
         app:layout_constraintVertical_bias="0.535" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSendCode"
         android:layout_width="115dp"
         android:layout_height="61dp"
         android:layout_marginStart="158dp"

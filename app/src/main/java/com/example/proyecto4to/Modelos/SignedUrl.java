@@ -3,9 +3,8 @@ package com.example.proyecto4to.Modelos;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Register {
+public class SignedUrl {
     private final int status;
     private final String message;
 
@@ -14,7 +13,7 @@ public class Register {
 
     private final String url;
 
-    public Register(int status, String message, ArrayList<ErrorRegister> error, String url) {
+    public SignedUrl(int status, String message, ArrayList<ErrorRegister> error, String url) {
         this.status = status;
         this.message = message;
         this.error = error;
