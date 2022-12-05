@@ -2,4 +2,5 @@
     <string name="app_name">Proyecto4to</string>
     <string name="verificarCorreo">En breves enviaremos una serie de correos a tu bandeja con las instrucciones necesarias para verificar tu cuenta. Por favor sigue las instrucciones proporcionadas para que puedas recibir un mensaje de texto a tu teléfono.</string>
     <string name="verificarTelefono">Ingresa aquí el código que hemos enviado a tu teléfono:</string>
+    <string name="AdafruitConnection">Es necesario conectar la app con Adafruit. Por favor, inicia sesión con Adafruti. Si no tienes una cuenta por favor regístrate.</string>
 </resources>

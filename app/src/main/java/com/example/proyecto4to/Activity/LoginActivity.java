@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (login.getStatus() == 200) {
                     Toast.makeText(getApplicationContext(), "" + login.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         }, new Response.ErrorListener() {
