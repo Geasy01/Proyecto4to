@@ -34,7 +34,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="289dp" />
+        tools:layout_editor_absoluteY="289dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/boton_verificar"
