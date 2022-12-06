@@ -2,10 +2,13 @@ package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView inputMail, inputPass;
     Button btnLogin;
     TextView textViewSignUp;
+    CheckBox cbxRememberMe;
     String token = null;
+
+    //SharedPreferences userPreference;
+    //SharedPreferences.Editor userEditor;
+    String key = "session";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputPass = (TextView) findViewById(R.id.inputPass);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
+        cbxRememberMe = (CheckBox) findViewById(R.id.cbxRememberMe);
         nQueue = SingletonRequest.getInstance(LoginActivity.this).getRequestQueue();
+        //userPreference = this.getSharedPreferences("sessions", Context.MODE_PRIVATE);
+        //userEditor = userPreference.edit();
 
         btnLogin.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
@@ -97,4 +108,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(view.getId() == R.id.textViewSignUp)
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
+    //public boolean checkSession() {
+        //return this.userPreference.getBoolean(key, false);
+    //}
+
+    //public void saveSession(boolean bear) {
+        //userEditor.putBoolean(key, bear);
+        //userEditor.apply();
+    //}
 }

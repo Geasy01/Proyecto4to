@@ -45,8 +45,6 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
 
         Bundle getSignedUrl = this.getIntent().getExtras();
         urlUnsigned = getSignedUrl.getString("url");
-
-        siguiente = (TextView) findViewById(R.id.siguiente);
     }
 
     public void getUrlSigned() {
@@ -118,10 +116,6 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
                 if(newUrl != null)
                 sendCode();
             }
-        }
-
-        if(view.getId() == R.id.siguiente){
-            startActivity(new Intent(this, AdafruitLoginActivity.class ));
         }
     }
 }

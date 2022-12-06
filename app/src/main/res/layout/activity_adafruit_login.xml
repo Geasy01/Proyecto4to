@@ -11,7 +11,7 @@
         android:id="@+id/ada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión con Adafruit"
+        android:text="Ingresa tus credenciales de Adafruit"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="30sp"
@@ -47,8 +47,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintTop_toBottomOf="@+id/loginada1"
+        app:layout_constraintVertical_bias="0.07" />
 
     <TextView
         android:id="@+id/adakey"
@@ -120,7 +120,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_bg_ada"
-        android:text="Iniciar sesión"
+        android:text="Ingresar"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/inputKeyAda"
