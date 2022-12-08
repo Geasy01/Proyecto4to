@@ -6,6 +6,7 @@
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.1" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1945" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/ic_agregar.xml" value="0.1945" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit_login.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_login.xml" value="0.25" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/verificar_correo.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/verificar_cuenta.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1675929884566054" />
       </map>
     </option>
   </component>
