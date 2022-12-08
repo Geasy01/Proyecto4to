@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Proyecto4to" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/azulClean</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -16,4 +16,5 @@
     <color name="purple_700">#51185E</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="azulClean">#27AA96</color>
 </resources>

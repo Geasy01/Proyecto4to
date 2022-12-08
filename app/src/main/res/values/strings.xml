@@ -5,4 +5,5 @@
     <string name="AdafruitConnection">Es necesario conectar la app con Adafruit. Por favor, inicia sesión con Adafruti. Si no tienes una cuenta por favor regístrate.</string>
     <string name="LoginAdafruit">Al ingresar a Adafruit selecciona la opción con el icono de la llave para revelar tu usuario y tu IO_Key</string>
     <string name="LoginAdafruit2">Debajo ingresa el IO_USERNAME y el IO_KEY que te fue proporcionado por Adafruit</string>
+    <string name="hello_blank_fragment">hola</string>
 </resources>
