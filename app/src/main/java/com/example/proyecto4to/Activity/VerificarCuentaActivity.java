@@ -28,7 +28,6 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
     EditText inputCode;
     Button btnSendCode;
     String urlUnsigned = null, newUrl = null;
-    TextView siguiente;
     private RequestQueue nQueue;
 
     @Override
@@ -110,7 +109,7 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
                 inputCode.setError("El campo código debe tener un mínimo de 4 caracteres.");
             } else if(inputCode.getText().toString().trim().length() > 4) {
                 inputCode.setError("El campo código debe tener un máximo de 4 caracteres");
-            } else {
+            } else if (inputCode.getText().toString().trim().length() == 4) {
                 getUrlSigned();
 
                 if(newUrl != null)

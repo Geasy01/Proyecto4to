@@ -27,6 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String SESSION_KEY = "session";
+    private static final String TOKEN_KEY = "token";
+
 
     private RequestQueue nQueue;
     TextView inputMail, inputPass;
@@ -35,9 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     CheckBox cbxRememberMe;
     String token = null;
 
-    //SharedPreferences userPreference;
-    //SharedPreferences.Editor userEditor;
-    String key = "session";
+    SharedPreferences sessionPreferences;
+    SharedPreferences.Editor sessionEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +52,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         cbxRememberMe = (CheckBox) findViewById(R.id.cbxRememberMe);
         nQueue = SingletonRequest.getInstance(LoginActivity.this).getRequestQueue();
-        //userPreference = this.getSharedPreferences("sessions", Context.MODE_PRIVATE);
-        //userEditor = userPreference.edit();
+        sessionPreferences = this.getSharedPreferences("sessionData", Context.MODE_PRIVATE);
+        sessionEditor = sessionPreferences.edit();
 
         btnLogin.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
+
+        if(checkSession())
+        {
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     public void login()
@@ -80,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (login.getStatus() == 200) {
                     Toast.makeText(getApplicationContext(), "" + login.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, AdafruitConnectionActivity.class));
+                    setUserPreferences();
                     finish();
                 }
             }
@@ -101,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else if (inputMail.getText().toString().trim().isEmpty()) {
                 inputMail.setError("El campo correo electrónico es obligatorio");
             } else {
+                saveSession(cbxRememberMe.isChecked());
                 login();
             }
         }
@@ -109,12 +118,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    //public boolean checkSession() {
-        //return this.userPreference.getBoolean(key, false);
-    //}
+    public boolean checkSession() {
+        return this.sessionPreferences.getBoolean(SESSION_KEY, false);
+    }
 
-    //public void saveSession(boolean bear) {
-        //userEditor.putBoolean(key, bear);
-        //userEditor.apply();
-    //}
+    public void saveSession(boolean bear) {
+        sessionEditor.putBoolean(SESSION_KEY, bear);
+        sessionEditor.apply();
+    }
+
+    public void setUserPreferences() {
+        sessionEditor.putString("token", ""+token);
+        sessionEditor.commit();
+    }
 }

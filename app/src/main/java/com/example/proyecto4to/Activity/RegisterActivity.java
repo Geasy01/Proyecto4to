@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String EMAIL_KEY = "email";
 
     private RequestQueue nQueue;
     EditText inputUsername, inputApaterno, inputAmaterno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
