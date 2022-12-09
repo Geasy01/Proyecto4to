@@ -3,8 +3,10 @@ package com.example.proyecto4to.Activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,13 +30,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String NAME_KEY = "nombre";
+    private static final String AP_KEY = "apaterno";
+    private static final String AM_KEY = "amaterno";
     private static final String EMAIL_KEY = "email";
+    private static final String PHONE_KEY = "phone";
 
     private RequestQueue nQueue;
     EditText inputUsername, inputApaterno, inputAmaterno, inputEmail, inputPassword, inputConfirmPassword, inputPhone;
     Button btnRegister;
     TextView alreadyHaveAccount;
     String signedUrl;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btnRegister.setOnClickListener(this);
         alreadyHaveAccount.setOnClickListener(this);
+
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
     }
 
     public void registerUser() {
@@ -81,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 signedUrl = register.getUrl();
 
                 if(register.getStatus() == 200) {
+                    setUserPreferences();
                     Toast.makeText(getApplicationContext(), "" + register.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, VerificarCuentaActivity.class));
 
@@ -155,5 +168,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     registerUser();
             }
         }
+    }
+
+    public void setUserPreferences() {
+        userEditor.putString(NAME_KEY, inputUsername.getText().toString());
+        userEditor.putString(AP_KEY, inputApaterno.getText().toString().trim());
+        userEditor.putString(AM_KEY,inputAmaterno.getText().toString().trim());
+        userEditor.putString(EMAIL_KEY, inputEmail.getText().toString().trim());
+        userEditor.putString(PHONE_KEY, inputPhone.getText().toString().trim());
+        userEditor.commit();
     }
 }

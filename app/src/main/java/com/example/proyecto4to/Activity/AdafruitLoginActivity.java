@@ -2,7 +2,9 @@ package com.example.proyecto4to.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +25,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AdafruitLoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String IO_KEY = "iokey";
+    private static final String IO_USERNAME_KEY = "iousername";
+
     private RequestQueue nQueue;
     Button btnLoginAda;
     EditText inputUsernameAda, inputKeyAda;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,9 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
         nQueue = SingletonRequest.getInstance(AdafruitLoginActivity.this).getRequestQueue();
 
         btnLoginAda.setOnClickListener(this);
+
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
     }
 
     public void sendAdafruitData()
@@ -60,6 +71,7 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
                 SendAdafruit sendAdafruit = gson.fromJson(response.toString(), SendAdafruit.class);
 
                 if (sendAdafruit.getStatus() == 200) {
+                    setUserPreferences();
                     Toast.makeText(getApplicationContext(), "" + sendAdafruit.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AdafruitLoginActivity.this, MainActivity.class));
                     finish();
@@ -87,6 +99,11 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
                 sendAdafruitData();
             }
         }
+    }
 
+    public void setUserPreferences() {
+        userEditor.putString(IO_USERNAME_KEY, inputUsernameAda.getText().toString());
+        userEditor.putString(IO_KEY, inputKeyAda.getText().toString());
+        userEditor.commit();
     }
 }

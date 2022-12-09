@@ -27,9 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String USER_PREFERENCES = "userPreferences";
     private static final String SESSION_KEY = "session";
     private static final String TOKEN_KEY = "token";
-
 
     private RequestQueue nQueue;
     TextView inputMail, inputPass;
@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     CheckBox cbxRememberMe;
     String token = null;
 
-    SharedPreferences sessionPreferences;
-    SharedPreferences.Editor sessionEditor;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         cbxRememberMe = (CheckBox) findViewById(R.id.cbxRememberMe);
         nQueue = SingletonRequest.getInstance(LoginActivity.this).getRequestQueue();
-        sessionPreferences = this.getSharedPreferences("sessionData", Context.MODE_PRIVATE);
-        sessionEditor = sessionPreferences.edit();
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
 
         btnLogin.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
@@ -119,16 +119,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public boolean checkSession() {
-        return this.sessionPreferences.getBoolean(SESSION_KEY, false);
+        return this.userPreferences.getBoolean(SESSION_KEY, false);
     }
 
     public void saveSession(boolean bear) {
-        sessionEditor.putBoolean(SESSION_KEY, bear);
-        sessionEditor.apply();
+        userEditor.putBoolean(SESSION_KEY, bear);
+        userEditor.apply();
     }
 
     public void setUserPreferences() {
-        sessionEditor.putString("token", ""+token);
-        sessionEditor.commit();
+        userEditor.putString(TOKEN_KEY, ""+token);
+        userEditor.commit();
     }
 }
