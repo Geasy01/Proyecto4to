@@ -6,4 +6,5 @@
     <string name="LoginAdafruit">Luego de iniciar sesión en Adafruit, selecciona la opción con el icono de la llave para revelar tu IO Username y tu IO Key</string>
     <string name="LoginAdafruit2">Por favor, ingresa el IO USERNAME y el IO KEY que te fue proporcionado por Adafruit</string>
     <string name="hello_blank_fragment">hola</string>
+    <string name="BluetoothEncender">Activa el bluetooth de tu dispositivo móvil para conectar tu CleanBot a la app</string>
 </resources>

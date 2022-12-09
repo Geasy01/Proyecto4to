@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationView);
         bottomNavigationView.setBackground(null);
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
-        getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,new FragmentInicio()).commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.mSetting : temp = new FragmentConfig();
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.framecontainer,temp).commit();
                 return true;
             }
         });
