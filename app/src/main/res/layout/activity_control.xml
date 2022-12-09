@@ -4,25 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ControlActivity">
+    tools:context=".ControlActivity"
+    android:background="@color/azulClean">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth"
+        android:textColor="@color/colorWhite"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="81dp" />
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
         android:id="@+id/joystickView_right"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:JV_backgroundColor="#009688"
-        app:JV_borderColor="#00796B"
+        app:JV_backgroundColor="@color/colorGrisOscuro"
+        app:JV_borderColor="@color/colorWhite"
         app:JV_borderWidth="4dp"
-        app:JV_buttonColor="#FF6E40"
+        app:JV_buttonColor="@color/colorRed"
 
         app:JV_buttonSizeRatio="15%"
         app:JV_fixedCenter="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintVertical_bias="0.656" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
