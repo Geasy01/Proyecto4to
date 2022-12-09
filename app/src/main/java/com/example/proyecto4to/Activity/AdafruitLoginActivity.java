@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,16 +25,21 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AdafruitLoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String IO_KEY = "iokey";
     private static final String IO_USERNAME_KEY = "iousername";
+    private static final String TOKEN_KEY = "token";
 
     private RequestQueue nQueue;
     Button btnLoginAda;
     EditText inputUsernameAda, inputKeyAda;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
 
         userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
     }
 
     public void sendAdafruitData()
@@ -82,7 +89,14 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("bearerToken", ""+token);
+                return headers;
+            }
+        };
 
         nQueue.add(sendAdafruiitData);
 

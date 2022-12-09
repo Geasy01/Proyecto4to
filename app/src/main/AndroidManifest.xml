@@ -27,6 +27,9 @@
         android:theme="@style/Theme.Proyecto4to"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.MisCarritosActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AdafruitLoginActivity"
             android:exported="false" />
         <activity
