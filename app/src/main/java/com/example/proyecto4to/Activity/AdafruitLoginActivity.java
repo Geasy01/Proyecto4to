@@ -80,7 +80,7 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
                 if (sendAdafruit.getStatus() == 200) {
                     setUserPreferences();
                     Toast.makeText(getApplicationContext(), "" + sendAdafruit.getMessage(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AdafruitLoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(AdafruitLoginActivity.this, MisCarritosActivity.class));
                     finish();
                 }
             }
@@ -93,7 +93,7 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("bearerToken", ""+token);
+                headers.put("auth_token", "5|pwupvLtza6O4eIs6yOmY8Ogc9hiskOECXlA9jqBU");
                 return headers;
             }
         };

@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.SystemClock;
 import com.example.proyecto4to.Activity.MainActivity;
+import com.example.proyecto4to.Activity.MisCarritosActivity;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -42,7 +44,7 @@ public class ConnectedThread extends Thread {
                     SystemClock.sleep(100);
                     bytes = mmInStream.available();
                     bytes = mmInStream.read(buffer, 0, bytes);
-                    mHandler.obtainMessage(MainActivity.MESSAGE_READ, bytes, -1, buffer)
+                    mHandler.obtainMessage(MisCarritosActivity.MESSAGE_READ, bytes, -1, buffer)
                             .sendToTarget();
                 }
             } catch (IOException e) {

@@ -105,11 +105,7 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
         if(view.getId() == R.id.btnSendCode) {
             if(inputCode.getText().toString().trim().isEmpty()) {
                 inputCode.setError("El campo código es obligatorio");
-            } else if(inputCode.getText().toString().trim().length() < 4) {
-                inputCode.setError("El campo código debe tener un mínimo de 4 caracteres.");
-            } else if(inputCode.getText().toString().trim().length() > 4) {
-                inputCode.setError("El campo código debe tener un máximo de 4 caracteres");
-            } else if (inputCode.getText().toString().trim().length() == 4) {
+            } else {
                 getUrlSigned();
 
                 if(newUrl != null)

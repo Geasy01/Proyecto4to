@@ -12,19 +12,26 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Modelos.DataUser;
 import com.example.proyecto4to.Modelos.Login;
 import com.example.proyecto4to.Modelos.Register;
 import com.example.proyecto4to.Modelos.SingletonRequest;
 import com.example.proyecto4to.R;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String USER_PREFERENCES = "userPreferences";
@@ -36,7 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button btnLogin;
     TextView textViewSignUp;
     CheckBox cbxRememberMe;
-    String token = null;
+    String token = null, adafruit_username = null;
+    DataUser dataUser;
 
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
@@ -85,8 +93,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 token = login.getToken();
 
                 if (login.getStatus() == 200) {
+                    getUserData();
                     Toast.makeText(getApplicationContext(), "" + login.getMessage(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, AdafruitConnectionActivity.class));
+
+                    if(adafruit_username == null)
+                    {
+                        startActivity(new Intent(LoginActivity.this, AdafruitConnectionActivity.class));
+                    }
+
+                    else
+                    {
+                        startActivity(new Intent(LoginActivity.this, MisCarritosActivity.class));
+                    }
+
                     setUserPreferences();
                     finish();
                 }
@@ -130,5 +149,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void setUserPreferences() {
         userEditor.putString(TOKEN_KEY, ""+token);
         userEditor.commit();
+    }
+
+    public void getUserData() {
+        String con = "https://cleanbotapi.live/api/v1/user";
+
+        JsonArrayRequest getUserData = new JsonArrayRequest(Request.Method.GET, con, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                final Gson gson = new Gson();
+                dataUser = gson.fromJson(response.toString(), DataUser.class);
+                adafruit_username = dataUser.getAdafruit_username();
+                Toast.makeText(getApplicationContext(), "" + dataUser.getName(), Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+           @Override
+           public Map<String, String> getHeaders() throws AuthFailureError {
+               HashMap<String, String> headers = new HashMap<String, String>();
+               headers.put("auth_token", "5|pwupvLtza6O4eIs6yOmY8Ogc9hiskOECXlA9jqBU");
+               return headers;
+           }
+        };
+
+        nQueue.add(getUserData);
     }
 }
