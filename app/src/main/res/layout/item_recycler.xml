@@ -41,23 +41,6 @@
 
         </TextView>
 
-        <Switch
-            android:id="@+id/BluetoothSwitch"
-            android:layout_width="176dp"
-            android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="216dp"
-            android:layout_toEndOf="@+id/textview"
-            android:text="Bluetooth"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533"
-            tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
