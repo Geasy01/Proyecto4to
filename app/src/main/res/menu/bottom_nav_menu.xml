@@ -4,14 +4,7 @@
         android:id="@+id/mHome"
         android:title="Home"
         android:icon="@drawable/ic_inicio"/>
-    <item
-        android:id="@+id/mSearch"
-        android:title="Search"
-        android:icon="@drawable/ic_search"/>
-    <item
-        android:id="@+id/placeholder"
-        android:title=""
-        />
+
     <item
         android:id="@+id/mPerson"
         android:title="Profile"
