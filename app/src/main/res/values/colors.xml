@@ -10,4 +10,5 @@
     <color name="colorGris">#171515</color>
     <color name="colorGrisOscuro">#333131</color>
     <color name="colorNuevoAzul">#002E58</color>
+    <color name="colorBtnOn">#38DDC9</color>
 </resources>
