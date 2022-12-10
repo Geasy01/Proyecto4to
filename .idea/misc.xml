@@ -5,12 +5,13 @@
       <map>
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.1" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.1" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_register.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_splash.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_verificar_cuenta.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/fragment_config.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1945" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable-v24/ic_power_pressed.xml" value="0.1945" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/ic_agregar.xml" value="0.1945" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/ic_power.xml" value="0.1945" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/joystick_button.xml" value="0.1945" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/joystick_pressed.xml" value="0.1945" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit_login.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.2" />

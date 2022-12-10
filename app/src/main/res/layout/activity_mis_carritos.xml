@@ -13,7 +13,6 @@
         android:background="@color/colorAzul"
         tools:ignore="MissingConstraints" />
 
-
     <TextView
         android:id="@+id/misCarritos"
         android:layout_width="wrap_content"
@@ -22,15 +21,33 @@
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="45sp"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtStatusBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:textColor="@color/colorAzul"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BluetoothSwitch"
+        app:layout_constraintVertical_bias="0.01" />
+
 
     <Switch
         android:id="@+id/BluetoothSwitch"
         android:layout_width="176dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="216dp"
+        android:layout_marginStart="229dp"
         android:layout_toEndOf="@+id/misCarritos"
         android:text="Bluetooth"
         android:textColor="@color/colorAzul"
@@ -44,24 +61,25 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_width="411dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="92dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtStatusBlue"
+        app:layout_constraintBottom_toTopOf="@id/btnAddBluetooth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnAddBluetooth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/btn_bg"
-        android:text="agregar carrito"
+        android:text="Buscar carrito"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

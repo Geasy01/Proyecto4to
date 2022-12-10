@@ -93,7 +93,8 @@ public class AdafruitLoginActivity extends AppCompatActivity implements View.OnC
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("auth_token", "5|pwupvLtza6O4eIs6yOmY8Ogc9hiskOECXlA9jqBU");
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", ""+token);
                 return headers;
             }
         };
