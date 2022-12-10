@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Modelos.ActivateUrl;
 import com.example.proyecto4to.Modelos.SignedUrl;
-import com.example.proyecto4to.Modelos.SingletonRequest;
+import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
 import com.google.gson.Gson;
 

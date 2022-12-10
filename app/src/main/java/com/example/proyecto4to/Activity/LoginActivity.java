@@ -21,8 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Modelos.DataUser;
 import com.example.proyecto4to.Modelos.Login;
-import com.example.proyecto4to.Modelos.Register;
-import com.example.proyecto4to.Modelos.SingletonRequest;
+import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
 import com.google.gson.Gson;
 

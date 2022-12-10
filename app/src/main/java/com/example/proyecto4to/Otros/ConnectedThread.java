@@ -1,4 +1,4 @@
-package com.example.proyecto4to.Modelos;
+package com.example.proyecto4to.Otros;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;

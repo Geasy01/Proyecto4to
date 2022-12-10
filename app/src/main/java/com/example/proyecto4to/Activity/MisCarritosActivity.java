@@ -19,18 +19,19 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyecto4to.Modelos.ConnectedThread;
+import com.example.proyecto4to.Modelos.Bluetooth;
+import com.example.proyecto4to.Otros.ConnectedThread;
 import com.example.proyecto4to.R;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -44,6 +45,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
     private BluetoothAdapter mBTAdapter;
     private Set<BluetoothDevice> mPairedDevices;
+    List<Bluetooth> ListaBluetooth;
     private Handler mHandler;
     private ConnectedThread mConnectedThread;
     private BluetoothSocket mBTSocket = null;

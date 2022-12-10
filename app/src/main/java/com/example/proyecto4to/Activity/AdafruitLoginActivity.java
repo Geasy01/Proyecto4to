@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Modelos.SendAdafruit;
-import com.example.proyecto4to.Modelos.SingletonRequest;
+import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
 import com.google.gson.Gson;
 
