@@ -55,12 +55,12 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
     private Handler mHandler;
     private ConnectedThread mConnectedThread;
     private BluetoothSocket mBTSocket = null;
-    private ListView mDevicesListView;
     ArrayList<Bluetooth> ListaBluetooth;
     BluetoothAdapterList adapter;
 
+    private ListView mDevicesListView;
     Switch BluetoothSwitch;
-    Button btnAddBluetooth;
+    Button btnAddBluetooth, btnAvanzarIn;
     TextView txtBlue, txtStatusBlue;
 
     ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -82,12 +82,15 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
         BluetoothSwitch = (Switch) findViewById(R.id.BluetoothSwitch);
         btnAddBluetooth = (Button) findViewById(R.id.btnAddBluetooth);
+        btnAddBluetooth = (Button) findViewById(R.id.btnAvanzarIn);
         txtStatusBlue = (TextView) findViewById(R.id.txtStatusBlue);
 
-        btnAddBluetooth.setOnClickListener(this);
+        btnAddBluetooth.setOnClickListener(this::onClick);
+        btnAddBluetooth.setOnClickListener(this::onClick);
+
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         ListaBluetooth = new ArrayList<Bluetooth>();
-        adapter = new BluetoothAdapterList(this, 5, ListaBluetooth);
+        adapter = new BluetoothAdapterList(this, R.layout.item_bluetooth, ListaBluetooth);
         mDevicesListView = (ListView) findViewById(R.id.devices_list_view);
         mDevicesListView.setAdapter(adapter);
         mDevicesListView.setOnItemClickListener(this::onItemSelected);
@@ -99,6 +102,8 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
                 bluetoothOff();
             }
         });
+
+        listPairedDevices();
 
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -130,6 +135,10 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         if(view.getId() == R.id.btnAddBluetooth){
             discover();
+        }
+
+        if(view.getId() == R.id.btnAvanzarIn) {
+            startActivity(new Intent(this, ControlActivity.class));
         }
     }
 
@@ -221,7 +230,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        BluetoothAdapterList adapter = (BluetoothAdapterList) adapterView.getAdapter();
+        adapter = (BluetoothAdapterList) adapterView.getAdapter();
         Bluetooth mDevice = adapter.getListaBluetooth().get(i);
 
         if (!mBTAdapter.isEnabled()) {

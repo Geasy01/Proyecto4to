@@ -13,21 +13,21 @@ import androidx.annotation.Nullable;
 import com.example.proyecto4to.Modelos.Bluetooth;
 import com.example.proyecto4to.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class BluetoothAdapterList extends ArrayAdapter<Bluetooth> {
-    private final List<Bluetooth> ListaBluetooth;
+    private final ArrayList<Bluetooth> ListaBluetooth;
     private final Context context;
     private final int resource;
 
-    public BluetoothAdapterList(@NonNull Context context, int resource, @NonNull List<Bluetooth> ListaBluetooth) {
+    public BluetoothAdapterList(@NonNull Context context, int resource, @NonNull ArrayList<Bluetooth> ListaBluetooth) {
         super(context, resource, ListaBluetooth);
         this.ListaBluetooth = ListaBluetooth;
         this.context = context;
         this.resource = resource;
     }
 
-    public List<Bluetooth> getListaBluetooth() {
+    public ArrayList<Bluetooth> getListaBluetooth() {
         return ListaBluetooth;
     }
 
@@ -35,7 +35,7 @@ public class BluetoothAdapterList extends ArrayAdapter<Bluetooth> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-        view = LayoutInflater.from(context).inflate(resource,  parent, false);
+        view = LayoutInflater.from(context).inflate(resource, parent, false);
         Bluetooth bluetooth = ListaBluetooth.get(position);
         TextView txtNombre = view.findViewById(R.id.deviceName);
         TextView txtAddress = view.findViewById(R.id.deviceAddress);
