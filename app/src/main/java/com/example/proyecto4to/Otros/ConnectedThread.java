@@ -3,7 +3,6 @@ package com.example.proyecto4to.Otros;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.SystemClock;
-import com.example.proyecto4to.Activity.MainActivity;
 import com.example.proyecto4to.Activity.MisCarritosActivity;
 
 import java.io.IOException;

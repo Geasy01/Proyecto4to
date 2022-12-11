@@ -24,13 +24,13 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyecto4to.Adaptadores.BluetoothAdapterList;
 import com.example.proyecto4to.Modelos.Bluetooth;
 import com.example.proyecto4to.Otros.ConnectedThread;
 import com.example.proyecto4to.R;
@@ -38,10 +38,11 @@ import com.example.proyecto4to.R;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
-public class MisCarritosActivity extends AppCompatActivity implements View.OnClickListener {
+public class MisCarritosActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
@@ -51,11 +52,12 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
     private BluetoothAdapter mBTAdapter;
     private Set<BluetoothDevice> mPairedDevices;
-    private ArrayAdapter<String> mBTArrayAdapter;
     private Handler mHandler;
     private ConnectedThread mConnectedThread;
     private BluetoothSocket mBTSocket = null;
     private ListView mDevicesListView;
+    ArrayList<Bluetooth> ListaBluetooth;
+    BluetoothAdapterList adapter;
 
     Switch BluetoothSwitch;
     Button btnAddBluetooth;
@@ -84,11 +86,11 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
         btnAddBluetooth.setOnClickListener(this);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
-        mBTArrayAdapter = new ArrayAdapter<>(this, R.layout.item_bluetooth);
-
+        ListaBluetooth = new ArrayList<Bluetooth>();
+        adapter = new BluetoothAdapterList(this, 5, ListaBluetooth);
         mDevicesListView = (ListView) findViewById(R.id.devices_list_view);
-        mDevicesListView.setAdapter(mBTArrayAdapter);
-        mDevicesListView.setOnItemClickListener(mDeviceClickListener);
+        mDevicesListView.setAdapter(adapter);
+        mDevicesListView.setOnItemClickListener(this::onItemSelected);
 
         BluetoothSwitch.setOnCheckedChangeListener((v, isChecked) -> {
             if (! mBTAdapter.isEnabled() && isChecked) {
@@ -118,7 +120,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
             }
         };
 
-        if (mBTArrayAdapter == null) {
+        if (ListaBluetooth == null) {
             txtStatusBlue.setText("Status: Bluetooth no encontrado");
             Toast.makeText(getApplicationContext(), "Bluetooth no encontrado", Toast.LENGTH_SHORT).show();
         }
@@ -164,7 +166,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(getApplicationContext(), "Búsqueda detenida", Toast.LENGTH_SHORT).show();
             } else {
                 if (mBTAdapter.isEnabled()) {
-                    mBTArrayAdapter.clear();
+                    ListaBluetooth.clear();
                     mBTAdapter.startDiscovery();
                     Toast.makeText(getApplicationContext(), "Búsqueda iniciada", Toast.LENGTH_SHORT).show();
                     registerReceiver(blReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
@@ -184,96 +186,29 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
                 if (ActivityCompat.checkSelfPermission(MisCarritosActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MisCarritosActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 1);
                 } else {
-                    mBTArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                    mBTArrayAdapter.notifyDataSetChanged();
+                    ListaBluetooth.add(new Bluetooth(device.getName(), device.getAddress()));
                 }
             }
         }
     };
 
     private void listPairedDevices() {
-        mBTArrayAdapter.clear();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MisCarritosActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 1);
-        } else {
-            mPairedDevices = mBTAdapter.getBondedDevices();
-            if (mBTAdapter.isEnabled()) {
-                for (BluetoothDevice device : mPairedDevices)
-                    mBTArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                Toast.makeText(getApplicationContext(), "Mostrando carritos", Toast.LENGTH_SHORT).show();
-            } else
-                Toast.makeText(getApplicationContext(), "Bluetooth no encendido", Toast.LENGTH_SHORT).show();
         }
+        ListaBluetooth.clear();
+        mPairedDevices = mBTAdapter.getBondedDevices();
+        if (mBTAdapter.isEnabled()) {
+            mPairedDevices.forEach(device -> {
+                BluetoothDevice mDevice = device;
+                ListaBluetooth.add(new Bluetooth(mDevice.getName(), mDevice.getAddress()));
+            });
+
+            Toast.makeText(getApplicationContext(), "Mostrando carritos", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getApplicationContext(), "Bluetooth no encendido", Toast.LENGTH_SHORT).show();
     }
 
-    private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            if (!mBTAdapter.isEnabled()) {
-                Toast.makeText(getBaseContext(), "Bluetooth no encendido", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            txtStatusBlue.setText("Conectando...");
-            String info = ((TextView) view).getText().toString();
-            final String address = info.substring(info.length() - 17);
-            final String name = info.substring(0, info.length() - 17);
-
-            new Thread() {
-                @Override
-                public void run() {
-                    boolean fail = false;
-
-                    BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
-
-                    try {
-                        mBTSocket = createBluetoothSocket(device);
-                    } catch (IOException e) {
-                        fail = true;
-                        Toast.makeText(getBaseContext(), "Socket creado sin exito", Toast.LENGTH_SHORT).show();
-                    }
-
-                    try {
-                        if (ActivityCompat.checkSelfPermission(MisCarritosActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-
-                        } else {
-                            mBTSocket.connect();
-                        }
-                    } catch (IOException e) {
-                        try {
-                            fail = true;
-                            mBTSocket.close();
-                            mHandler.obtainMessage(CONNECTING_STATUS, -1, -1)
-                                    .sendToTarget();
-                        } catch (IOException e2) {
-                            Toast.makeText(getBaseContext(),"Error al crear el socket", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    if (!fail) {
-                            mConnectedThread = new ConnectedThread(mBTSocket, mHandler);
-                            mConnectedThread.start();
-
-                            mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, name)
-                                    .sendToTarget();
-                        }
-                    }
-            }.start();
-        }
-    };
-
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
-        try {
-            final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
-            return (BluetoothSocket) m.invoke(device, BT_MODULE_UUID);
-        } catch (Exception e) {
-            Log.e("Error", "Could not create Insecure RFComm Connection", e);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-
-        }
-        return device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -283,5 +218,76 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
         {
 
         }
+    }
+
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        BluetoothAdapterList adapter = (BluetoothAdapterList) adapterView.getAdapter();
+        Bluetooth mDevice = adapter.getListaBluetooth().get(i);
+
+        if (!mBTAdapter.isEnabled()) {
+            Toast.makeText(getBaseContext(), "Bluetooth no encendido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        txtStatusBlue.setText("Conectando...");
+        final String address = mDevice.getAddress();
+        final String name = mDevice.getName();
+
+        new Thread() {
+            @Override
+            public void run() {
+                boolean fail = false;
+
+                BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+
+                try {
+                    mBTSocket = createBluetoothSocket(device);
+                } catch (IOException e) {
+                    fail = true;
+                    Toast.makeText(getBaseContext(), "Error al crear el socket", Toast.LENGTH_SHORT).show();
+                }
+
+                try {
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MisCarritosActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 1);
+                    }
+                    mBTSocket.connect();
+                } catch (IOException e) {
+                    try {
+                        fail = true;
+                        mBTSocket.close();
+                        mHandler.obtainMessage(CONNECTING_STATUS, -1, -1)
+                                .sendToTarget();
+                    } catch (IOException e2) {
+                        Toast.makeText(getBaseContext(),"Error al crear el socket", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                if (!fail) {
+                    mConnectedThread = new ConnectedThread(mBTSocket, mHandler);
+                    mConnectedThread.start();
+
+                    mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, name)
+                            .sendToTarget();
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+        try {
+            final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
+            return (BluetoothSocket) m.invoke(device, BT_MODULE_UUID);
+        } catch (Exception e) {
+            Log.e("Error", "Could not create Insecure RFComm Connection", e);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MisCarritosActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 1);
+        }
+        return device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
     }
 }

@@ -20,9 +20,8 @@ public class BluetoothAdapterList extends ArrayAdapter<Bluetooth> {
     private final Context context;
     private final int resource;
 
-
-    public BluetoothAdapterList(@NonNull Context context, int resource, @NonNull List<Bluetooth> objects, List<Bluetooth> ListaBluetooth) {
-        super(context, resource, objects);
+    public BluetoothAdapterList(@NonNull Context context, int resource, @NonNull List<Bluetooth> ListaBluetooth) {
+        super(context, resource, ListaBluetooth);
         this.ListaBluetooth = ListaBluetooth;
         this.context = context;
         this.resource = resource;

@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        findViewById(R.id.btnPersonalizado).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.btnPersonalizado).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mostrarDialogoPersonalizado();
             }
-        });
+        });*/
     }
 
     private void replaceFragment(Fragment fragment){
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void mostrarModal(){
+    /*private void mostrarModal(){
         AlertDialog.Builder builder = new AlertDialog.Builder(FragmentPerfil.class);
 
         LayoutInflater inflater = getLayoutInflater();
@@ -97,5 +97,5 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-    }
+    }*/
 }
