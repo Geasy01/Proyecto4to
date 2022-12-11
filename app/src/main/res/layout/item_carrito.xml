@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:background="@color/colorAzul">
 
         <ImageView
@@ -23,12 +23,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.205" />
+            app:layout_constraintVertical_bias="0.505" />
 
         <TextView
-            android:id="@+id/textview"
-            android:layout_width="61dp"
-            android:layout_height="31dp"
+            android:id="@+id/deviceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@id/imageview"
@@ -37,6 +37,22 @@
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageview"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/deviceAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/imageview"
+            android:text="Gaysi"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/imageview"
+            app:layout_constraintTop_toBottomOf="@id/deviceName"
             tools:ignore="MissingConstraints">
 
         </TextView>

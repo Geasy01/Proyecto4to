@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.service.controls.Control;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -60,7 +61,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
     private ListView mDevicesListView;
     Switch BluetoothSwitch;
-    Button btnAddBluetooth, btnAvanzarIn;
+    Button btnAvanzarIn;
     TextView txtBlue, txtStatusBlue;
 
     ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -81,16 +82,14 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_mis_carritos);
 
         BluetoothSwitch = (Switch) findViewById(R.id.BluetoothSwitch);
-        btnAddBluetooth = (Button) findViewById(R.id.btnAddBluetooth);
-        btnAddBluetooth = (Button) findViewById(R.id.btnAvanzarIn);
+        btnAvanzarIn = (Button) findViewById(R.id.btnAvanzarIn);
         txtStatusBlue = (TextView) findViewById(R.id.txtStatusBlue);
 
-        btnAddBluetooth.setOnClickListener(this::onClick);
-        btnAddBluetooth.setOnClickListener(this::onClick);
+        btnAvanzarIn.setOnClickListener(this::onClick);
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         ListaBluetooth = new ArrayList<Bluetooth>();
-        adapter = new BluetoothAdapterList(this, R.layout.item_bluetooth, ListaBluetooth);
+        adapter = new BluetoothAdapterList(this, R.layout.item_carrito, ListaBluetooth);
         mDevicesListView = (ListView) findViewById(R.id.devices_list_view);
         mDevicesListView.setAdapter(adapter);
         mDevicesListView.setOnItemClickListener(this::onItemSelected);
@@ -98,10 +97,16 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
         BluetoothSwitch.setOnCheckedChangeListener((v, isChecked) -> {
             if (! mBTAdapter.isEnabled() && isChecked) {
                 bluetoothOn();
-            } else {
+            } else if(mBTAdapter.isEnabled() && !isChecked) {
                 bluetoothOff();
             }
         });
+
+        if (mBTAdapter.isEnabled()) {
+            BluetoothSwitch.setChecked(true);
+        } else {
+            BluetoothSwitch.setChecked(false);
+        }
 
         listPairedDevices();
 
@@ -133,10 +138,6 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.btnAddBluetooth){
-            discover();
-        }
-
         if(view.getId() == R.id.btnAvanzarIn) {
             startActivity(new Intent(this, ControlActivity.class));
         }
@@ -225,7 +226,17 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
         switch (requestCode)
         {
+            case 1:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
 
+                }
+
+                else {
+                    System.out.println("No se tienen los permisos necesarios para realizar esta acción.");
+                }
+
+                return;
         }
     }
 
@@ -277,6 +288,11 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
                     mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, name)
                             .sendToTarget();
+
+                    Intent sendBluetooth = new Intent(MisCarritosActivity.this, ControlActivity.class);
+                    sendBluetooth.putExtra("btDevice", address);
+                    startActivity(sendBluetooth);
+
                 }
             }
         }.start();
