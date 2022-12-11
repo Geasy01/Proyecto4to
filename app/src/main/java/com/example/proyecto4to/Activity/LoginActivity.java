@@ -92,18 +92,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 token = login.getToken();
 
                 if (login.getStatus() == 200) {
-                    getUserData();
+                    //getUserData();
                     Toast.makeText(getApplicationContext(), "" + login.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    if(adafruit_username == null)
-                    {
-                        startActivity(new Intent(LoginActivity.this, AdafruitConnectionActivity.class));
-                    }
-
-                    else
-                    {
+                    //if(adafruit_username == null)
+                    //{
                         startActivity(new Intent(LoginActivity.this, MisCarritosActivity.class));
-                    }
+                    //}
+
+                    //else
+                    //{
+                        //startActivity(new Intent(LoginActivity.this, MisCarritosActivity.class));
+                    //}
 
                     setUserPreferences();
                     finish();
@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
            @Override
            public Map<String, String> getHeaders() throws AuthFailureError {
                HashMap<String, String> headers = new HashMap<String, String>();
-               headers.put("auth_token", "5|pwupvLtza6O4eIs6yOmY8Ogc9hiskOECXlA9jqBU");
+               headers.put("Authorization", "Bearer " + token);
                return headers;
            }
         };
