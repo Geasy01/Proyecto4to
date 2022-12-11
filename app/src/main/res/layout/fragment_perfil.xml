@@ -1,14 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.FragmentPerfil">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.FragmentPerfil"
+    android:background="@color/colorAzul">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <ImageView
+        android:id="@+id/ic_perfil"
+        android:layout_width="107dp"
+        android:layout_height="107dp"
+        android:src="@drawable/ic_person_ada"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil de Usuario"
+        android:textColor="@color/colorWhite"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="89dp" />
+
+    <LinearLayout
+        android:id="@+id/linearPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@drawable/custom_fondo"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="138dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/btn_bg"
+            android:text="Editar perfil"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="17sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre(s)"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/namePerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Nombre"
+            android:textColor="@color/colorAzul"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"/>
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellidos"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/linearApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:id="@+id/lastname1Perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido1"
+                android:textColor="@color/colorAzul"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/lastname2Perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido2"
+                android:textColor="@color/colorAzul"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefono"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/telefonoPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Telefono"
+            android:textColor="@color/colorAzul"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"/>
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/emailPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Correo"
+            android:textColor="@color/colorAzul"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"/>
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
