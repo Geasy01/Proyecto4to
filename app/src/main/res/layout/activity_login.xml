@@ -102,7 +102,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_security"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Ingresa tu contraseña"
