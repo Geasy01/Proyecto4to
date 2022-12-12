@@ -7,7 +7,7 @@
     tools:context=".Activity.FragmentPerfil"
     android:background="@color/colorAzul">
 
-    <!-- TODO: Update blank fragment layout -->
+
 
 
     <LinearLayout
@@ -20,6 +20,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_arrow_back"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
