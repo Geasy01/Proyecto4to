@@ -110,6 +110,16 @@ public class FragmentConfig extends Fragment {
             }
         });
 
+        updatePassword = vista.findViewById(R.id.updatePassword);
+        updatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(vista.getContext(), ActualizarPasswordActivity.class));
+            }
+        });
+
+
+
         nQueue = SingletonRequest.getInstance(vista.getContext()).getRequestQueue();
         userPreferences = vista.getContext().getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         userEditor = userPreferences.edit();
