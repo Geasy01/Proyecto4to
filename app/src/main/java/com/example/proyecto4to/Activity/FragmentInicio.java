@@ -1,16 +1,37 @@
 package com.example.proyecto4to.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Adaptadores.AdafruitFeedAdapter;
+import com.example.proyecto4to.Modelos.AdafruitFeed;
+import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +50,17 @@ public class FragmentInicio extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String TOKEN_KEY = "token";
+
+    private RequestQueue nQueue;
+    ArrayList<AdafruitFeed> adF;
+    AdafruitFeedAdapter adapterFeed;
+    RecyclerView recyclerView;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
+    String token;
 
     public FragmentInicio() {
         // Required empty public constructor
@@ -73,6 +105,48 @@ public class FragmentInicio extends Fragment {
                 startActivity(new Intent(v.getContext(), ControlActivity.class));
             }
         });
+
+        nQueue = SingletonRequest.getInstance(view.getContext()).getRequestQueue();
+        adF = new ArrayList<>();
+        userPreferences = view.getContext().getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
+
+        getFeeds();
         return view;
+    }
+
+    public void getFeeds() {
+        String url = "https://cleanbotapi.live/api/v1/feeds";
+
+        final JsonObjectRequest getFeeds = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFeed);
+                recyclerView.setHasFixedSize(true);
+                LinearLayoutManager linearManager = new LinearLayoutManager(view.getContext());
+                recyclerView.setLayoutManager(linearManager);
+
+                final Gson gson = new Gson();
+                final AdafruitFeed adafruitFeed = gson.fromJson(response.toString(), AdafruitFeed.class);
+                adapterFeed = new AdafruitFeedAdapter(adafruitFeed.getListFeedData());
+                recyclerView.setAdapter(adapterFeed);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("errorPeticion", error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
+
+        nQueue.add(getFeeds);
     }
 }

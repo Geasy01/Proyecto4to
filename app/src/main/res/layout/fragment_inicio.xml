@@ -59,9 +59,12 @@
         app:layout_constraintVertical_bias="0.229" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="524dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="229dp" />
+        android:id="@+id/recyclerFeed"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnControlar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
