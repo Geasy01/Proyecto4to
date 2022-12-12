@@ -31,9 +31,11 @@
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_verificar_cuenta.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/adafruit.xml" value="0.25" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_config.xml" value="0.12090163934426229" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_inicio.xml" value="0.12090163934426229" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_config.xml" value="0.22" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_inicio.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_perfil.xml" value="0.16" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/item_carrito.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/item_feed.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/item_recycler.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/modal_editar.xml" value="0.1171448087431694" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.20416666666666666" />
