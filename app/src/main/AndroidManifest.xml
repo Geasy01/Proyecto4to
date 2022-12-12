@@ -30,6 +30,9 @@
 >>>>>>> Stashed changes
             android:exported="false" />
         <activity
+            android:name=".LineChart"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ControlActivity"
             android:exported="false" />
         <activity
