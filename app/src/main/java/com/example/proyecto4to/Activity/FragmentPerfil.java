@@ -1,12 +1,17 @@
 package com.example.proyecto4to.Activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.proyecto4to.R;
 
@@ -15,7 +20,7 @@ import com.example.proyecto4to.R;
  * Use the {@link FragmentPerfil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentPerfil extends Fragment {
+public class FragmentPerfil extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,5 +69,15 @@ public class FragmentPerfil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_perfil, container, false);
+    }
+
+
+
+    @Override
+    public void onClick(View view) {
+
+        if(view.getId() == R.id.editButton){
+            Intent myIntent = new Intent(view.getContext(), EditPerfilActivity.class);
+        }
     }
 }

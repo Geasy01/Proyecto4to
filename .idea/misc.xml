@@ -16,18 +16,25 @@
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_nwbluetooth.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_recycler.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1945" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/btn_bg_logout.xml" value="0.1945" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/custom_fondo_edit.xml" value="0.1945" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/ic_agregar.xml" value="0.1945" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1945" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit.xml" value="0.1171448087431694" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit_login.xml" value="0.2" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_configuracion.xml" value="0.18" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.2" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_edit_perfil.xml" value="0.2" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_mis_carritos.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_verificar_cuenta.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/adafruit.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_perfil.xml" value="0.16" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/item_recycler.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/modal_editar.xml" value="0.1171448087431694" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/verificar_correo.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/verificar_cuenta.xml" value="0.25" />
