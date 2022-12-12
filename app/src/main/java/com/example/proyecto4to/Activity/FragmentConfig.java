@@ -1,5 +1,8 @@
 package com.example.proyecto4to.Activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +10,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Modelos.Logout;
+import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +44,17 @@ public class FragmentConfig extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String SESSION_KEY = "session";
+    private static final String TOKEN_KEY = "token";
+
+    View vista;
+    Button logout;
+    private RequestQueue nQueue;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
+    String token;
 
     public FragmentConfig() {
         // Required empty public constructor
@@ -61,6 +91,52 @@ public class FragmentConfig extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_config, container, false);
+        vista = inflater.inflate(R.layout.fragment_config, container, false);
+        logout = vista.findViewById(R.id.btnLogout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+
+        nQueue = SingletonRequest.getInstance(vista.getContext()).getRequestQueue();
+        userPreferences = vista.getContext().getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
+        return vista;
+    }
+
+    public void logout() {
+        String url = "https://cleanbotapi.live/api/v1/logout";
+
+        JsonObjectRequest logout = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                final Gson gson = new Gson();
+                final Logout logout = gson.fromJson(response.toString(), Logout.class);
+
+                if (logout.getStatus() == 200) {
+                    Toast.makeText(vista.getContext(), "" + logout.getMessage(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(vista.getContext(), LoginActivity.class));
+                    userEditor.putBoolean(SESSION_KEY, false);
+                    userEditor.apply();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
+
+        nQueue.add(logout);
     }
 }

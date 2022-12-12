@@ -20,7 +20,7 @@ import com.example.proyecto4to.R;
  * Use the {@link FragmentPerfil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentPerfil extends Fragment implements View.OnClickListener {
+public class FragmentPerfil extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +30,8 @@ public class FragmentPerfil extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View vista;
+    Button btnEditarProfile;
 
     public FragmentPerfil() {
         // Required empty public constructor
@@ -60,24 +62,20 @@ public class FragmentPerfil extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
-    }
-
-
-
-    @Override
-    public void onClick(View view) {
-
-        if(view.getId() == R.id.editButton){
-            Intent myIntent = new Intent(view.getContext(), EditPerfilActivity.class);
-        }
+        vista = inflater.inflate(R.layout.fragment_perfil, container, false);
+        btnEditarProfile = vista.findViewById(R.id.btnEditarProfile);
+        btnEditarProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), EditPerfilActivity.class));
+            }
+        });
+        return vista;
     }
 }

@@ -23,9 +23,6 @@
             android:name=".Activity.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".Activity.ConfiguracionActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.EditPerfilActivity"
             android:exported="false" />
         <activity

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ConfiguracionActivity"
     android:background="@color/colorWhite">
 
 
@@ -92,12 +91,8 @@
         android:background="@android:color/darker_gray"/>
 
 
-
-
-
-
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnLogout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

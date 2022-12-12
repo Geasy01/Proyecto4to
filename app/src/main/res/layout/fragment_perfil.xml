@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/editButton"
+            android:id="@+id/btnEditarProfile"
             android:layout_width="138dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
