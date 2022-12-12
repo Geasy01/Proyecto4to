@@ -20,10 +20,19 @@
         android:theme="@style/Theme.Proyecto4to"
         tools:targetApi="31">
         <activity
+            android:name=".Graphics.LineDistancia"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AgregarFeedActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ActualizarPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Otros.DemoBase"
+            android:exported="false" />
+        <activity
+            android:name=".Otros.Linechart"
             android:exported="false" />
         <activity
             android:name=".Activity.ActualizarCredencialesAdafruitActivity"
