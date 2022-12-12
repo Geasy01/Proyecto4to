@@ -8,27 +8,33 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
     <TextView
         android:id="@+id/topNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="   CleanBot"
-        android:textSize="40sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
+        android:background="@color/colorAzul"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center_horizontal"
-        android:background="@color/colorAzul"/>
-
+        android:text="   CleanBot"
+        android:textColor="@color/colorWhite"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.000" />
 
     <ImageView
         android:layout_width="89dp"
         android:layout_height="87dp"
+        android:layout_marginBottom="664dp"
         android:background="@drawable/loguito"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintHorizontal_bias="0.229"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-22dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -61,10 +67,31 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFeed"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnControlar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnControlar"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <Button
+        android:id="@+id/addFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg_feed"
+        android:text="Agregar Feed"
+        android:textAlignment="center"
+        android:textColor="@color/colorGrisOscuro"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerFeed"
+        app:layout_constraintVertical_bias="0.218" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
