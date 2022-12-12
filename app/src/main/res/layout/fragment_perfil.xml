@@ -39,7 +39,7 @@
     <LinearLayout
         android:id="@+id/linearPerfil"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="470dp"
         android:background="@drawable/custom_fondo"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
