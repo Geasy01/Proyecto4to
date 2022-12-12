@@ -7,9 +7,6 @@
     tools:context=".Activity.FragmentPerfil"
     android:background="@color/colorAzul">
 
-
-
-
     <LinearLayout
         android:id="@+id/linearEdit"
         android:layout_width="match_parent"
@@ -22,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <View
+            android:id="@+id/vBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -39,8 +37,8 @@
             android:layout_marginTop="100dp"
             android:layout_marginStart="20dp"/>
 
-        <TextView
-            android:id="@+id/namePerfil"
+        <EditText
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -50,17 +48,10 @@
             android:textStyle="bold"
             android:layout_marginStart="20dp"/>
 
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@android:color/darker_gray"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apellidos"
+            android:text="Apellido paterno"
             android:textColorHint="@color/colorBlack"
             android:textSize="16sp"
             android:layout_marginTop="30dp"
@@ -73,39 +64,39 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp">
 
-            <TextView
-                android:id="@+id/lastname1Perfil"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/etApellido"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apellido1"
                 android:textColor="@color/colorAzul"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/lastname2Perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apellido2"
-                android:textColor="@color/colorAzul"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"/>
-
 
         </LinearLayout>
 
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@android:color/darker_gray"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellido materno"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"/>
 
+        <EditText
+            android:id="@+id/etApellido2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apellido2"
+            android:textColor="@color/colorAzul"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnGuardar"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -121,7 +112,7 @@
             app:layout_constraintVertical_bias="0.75" />
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnCancelar"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
