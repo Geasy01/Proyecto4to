@@ -20,17 +20,13 @@
         android:theme="@style/Theme.Proyecto4to"
         tools:targetApi="31">
         <activity
-<<<<<<< Updated upstream
-            android:name=".MainActivity2"
-=======
-            android:name=".ConfiguracionActivity"
+            android:name=".Activity.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".EditPerfilActivity"
->>>>>>> Stashed changes
+            android:name=".Activity.ConfiguracionActivity"
             android:exported="false" />
         <activity
-            android:name=".LineChart"
+            android:name=".Activity.EditPerfilActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ControlActivity"

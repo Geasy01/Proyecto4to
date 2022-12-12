@@ -7,10 +7,6 @@
     <string name="LoginAdafruit2">Por favor, ingresa el IO USERNAME y el IO KEY que te fue proporcionado por Adafruit</string>
     <string name="hello_blank_fragment">hola</string>
     <string name="BluetoothEncender">Activa el bluetooth de tu dispositivo móvil para conectar tu CleanBot a la app</string>
-<<<<<<< Updated upstream
-
     <string name="dash">-</string>
-=======
     <string name="Bienvenido">Bienvenido al asistente de controlador de tu CleanBot</string>
->>>>>>> Stashed changes
 </resources>
