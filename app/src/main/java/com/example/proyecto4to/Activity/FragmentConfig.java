@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -51,6 +52,7 @@ public class FragmentConfig extends Fragment {
 
     View vista;
     Button logout;
+    TextView upKeyAdafruit, updatePassword;
     private RequestQueue nQueue;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
@@ -97,6 +99,14 @@ public class FragmentConfig extends Fragment {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        upKeyAdafruit = vista.findViewById(R.id.upKeyAdafruit);
+        upKeyAdafruit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(vista.getContext(), ActualizarCredencialesAdafruitActivity.class));
             }
         });
 

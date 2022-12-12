@@ -8,7 +8,7 @@
     android:background="@color/colorBlack">
 
     <View
-        android:id="@+id/vBack"
+        android:id="@+id/viBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/ic_arrow_back_white"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.151" />
 
     <EditText
-        android:id="@+id/inputUsernameAda"
+        android:id="@+id/inputUserAda"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/adakey" />
 
     <EditText
-        android:id="@+id/inputKeyAda"
+        android:id="@+id/inputIO"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -82,20 +82,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputUsernameAda"
+        app:layout_constraintTop_toBottomOf="@id/inputUserAda"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btnLoginAda"
+        android:id="@+id/btnLoginAda2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_bg_ada"
         android:text="Actualizar"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/inputKeyAda"
+        app:layout_constraintEnd_toEndOf="@id/inputIO"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/inputKeyAda"
+        app:layout_constraintStart_toStartOf="@id/inputIO"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.613" />
 

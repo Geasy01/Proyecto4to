@@ -39,7 +39,7 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class FragmentInicio extends Fragment {
-    Button btnControlar;
+    Button btnControlar, btnAddFeed;
     View view;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -99,10 +99,18 @@ public class FragmentInicio extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_inicio, container, false);
         btnControlar = view.findViewById(R.id.btnControlar);
+        btnAddFeed = view.findViewById(R.id.btnAddFeed);
         btnControlar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(), ControlActivity.class));
+            }
+        });
+
+        btnAddFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), ));
             }
         });
 
