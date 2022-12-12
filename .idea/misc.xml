@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.1" />
-        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.16" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.1" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_mis_carritos.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_register.xml" value="0.2056159420289855" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_splash.xml" value="0.2056159420289855" />
@@ -13,7 +13,6 @@
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/fragment_config.xml" value="0.25" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_bluetooth.xml" value="0.25" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_carrito.xml" value="0.25" />
-        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_nwbluetooth.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/item_recycler.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1945" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/drawable/btn_bg_logout.xml" value="0.1945" />
@@ -25,13 +24,15 @@
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_configuracion.xml" value="0.18" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_edit_perfil.xml" value="0.2" />
-        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_mis_carritos.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/activity_verificar_cuenta.xml" value="0.25" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/adafruit.xml" value="0.25" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_config.xml" value="0.12090163934426229" />
+        <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_inicio.xml" value="0.12090163934426229" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/fragment_perfil.xml" value="0.16" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/item_recycler.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gaele/Documents/GitHub/Proyecto4to/app/src/main/res/layout/modal_editar.xml" value="0.1171448087431694" />
