@@ -288,11 +288,6 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
 
                     mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, name)
                             .sendToTarget();
-
-                    Intent sendBluetooth = new Intent(MisCarritosActivity.this, ControlActivity.class);
-                    sendBluetooth.putExtra("btDevice", address);
-                    startActivity(sendBluetooth);
-
                 }
             }
         }.start();

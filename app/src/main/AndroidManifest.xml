@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Proyecto4to"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ControlActivity"
             android:exported="false" />
         <activity

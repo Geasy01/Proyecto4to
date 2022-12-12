@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(checkSession())
         {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, ControlActivity.class));
         }
     }
 
