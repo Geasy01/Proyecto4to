@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046"
+        app:layout_constraintVertical_bias="0.134"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -34,12 +34,12 @@
         app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.175" />
 
     <LinearLayout
         android:id="@+id/linearPerfil"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="500dp"
         android:background="@drawable/custom_fondo"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
