@@ -110,7 +110,7 @@ public class FragmentInicio extends Fragment {
         btnAddFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), ));
+                startActivity(new Intent(v.getContext(), AgregarFeedActivity.class));
             }
         });
 
