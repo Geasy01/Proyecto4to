@@ -117,8 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.alreadyHaveAccount)
-            //startActivity(new Intent(this, LoginActivity.class));
-            startActivity(new Intent(this, MisCarritosActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
 
         if (view.getId() == R.id.btnRegister) {
             if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())) {

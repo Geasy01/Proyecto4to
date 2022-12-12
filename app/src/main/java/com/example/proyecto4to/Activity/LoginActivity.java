@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String SESSION_KEY = "session";
     private static final String TOKEN_KEY = "token";
+    private static final String IO_USERNAME_KEY = "iousername";
 
     private RequestQueue nQueue;
     TextView inputMail, inputPass;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(checkSession())
         {
-            startActivity(new Intent(this, ControlActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -92,18 +93,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 token = login.getToken();
 
                 if (login.getStatus() == 200) {
-                    //getUserData();
+                    getUserData();
                     Toast.makeText(getApplicationContext(), "" + login.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    //if(adafruit_username == null)
-                    //{
-                        startActivity(new Intent(LoginActivity.this, MisCarritosActivity.class));
-                    //}
 
-                    //else
-                    //{
-                        //startActivity(new Intent(LoginActivity.this, MisCarritosActivity.class));
-                    //}
+                    if(userPreferences.getString(IO_USERNAME_KEY, null) == null)
+                    {
+                        startActivity(new Intent(LoginActivity.this, AdafruitConnectionActivity.class));
+                    }
+
+                    else
+                    {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
 
                     setUserPreferences();
                     finish();
@@ -153,9 +155,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void getUserData() {
         String con = "https://cleanbotapi.live/api/v1/user";
 
-        JsonArrayRequest getUserData = new JsonArrayRequest(Request.Method.GET, con, null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest getUserData = new JsonObjectRequest(Request.Method.GET, con, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
                 dataUser = gson.fromJson(response.toString(), DataUser.class);
                 adafruit_username = dataUser.getAdafruit_username();

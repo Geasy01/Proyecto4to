@@ -139,7 +139,7 @@ public class MisCarritosActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnAvanzarIn) {
-            startActivity(new Intent(this, ControlActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
