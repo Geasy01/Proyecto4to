@@ -41,6 +41,7 @@ import java.util.Map;
 public class FragmentInicio extends Fragment {
     Button btnControlar, btnAddFeed;
     View view;
+    String temperatura, distancia, infrarrojo, polvo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -138,8 +139,11 @@ public class FragmentInicio extends Fragment {
                 final Gson gson = new Gson();
                 final AdafruitFeed adafruitFeed = gson.fromJson(response.toString(), AdafruitFeed.class);
                 adapterFeed = new AdafruitFeedAdapter(adafruitFeed.getListFeedData());
+                temperatura = adafruitFeed.getListFeedData().get(0).getName();
+                distancia = adafruitFeed.getListFeedData().get(1).getName();
+                infrarrojo = adafruitFeed.getListFeedData().get(2).getName();
+                polvo = adafruitFeed.getListFeedData().get(3).getName();
                 recyclerView.setAdapter(adapterFeed);
-
             }
         }, new Response.ErrorListener() {
             @Override

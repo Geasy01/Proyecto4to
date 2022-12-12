@@ -7,6 +7,8 @@
         <entry key="..\:/Users/canela/AndroidStudioProjects/Proyecto4to/app/src/main/res/layout/recycler.xml" value="0.1" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_actualizar_credenciales_adafruit.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_actualizar_password.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_adafruit_login.xml" value="0.25" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_agregar_feed.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_control.xml" value="0.16" />
         <entry key="..\:/Users/carlo/OneDrive/Documentos/GitHub/Proyecto4to/app/src/main/res/layout/activity_edit_perfil.xml" value="0.25" />
@@ -43,7 +45,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
