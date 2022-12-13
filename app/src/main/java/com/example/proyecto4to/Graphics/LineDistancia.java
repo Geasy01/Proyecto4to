@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -64,6 +65,8 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
     private RequestQueue nQueue;
+    private final int TIEMPO = 5000;
+    int i = 1;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
     ArrayList<Distancia> Value;
@@ -77,7 +80,18 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setTitle("LineChartActivity1");
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                i++;
+                int line = 45;
+                setData(line-i,180);
+
+                handler.postDelayed(this, TIEMPO);
+            }
+
+        }, TIEMPO);
         nQueue = SingletonRequest.getInstance(LineDistancia.this).getRequestQueue();
 
         tvX = findViewById(R.id.tvXMax);
