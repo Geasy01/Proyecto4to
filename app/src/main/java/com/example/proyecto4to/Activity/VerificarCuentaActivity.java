@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 public class VerificarCuentaActivity extends AppCompatActivity implements View.OnClickListener {
     EditText inputCode;
-    Button btnSendCode;
+    Button btnSendCode, btnVerfie;
     String urlUnsigned = null, newUrl = null;
     private RequestQueue nQueue;
 
@@ -36,8 +36,10 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
 
         inputCode = (EditText) findViewById(R.id.inputCode);
         btnSendCode = (Button) findViewById(R.id.btnSendCode);
+        btnVerfie = (Button) findViewById(R.id.btnVerfie);
 
         btnSendCode.setOnClickListener(this);
+        btnVerfie.setOnClickListener(this);
 
         nQueue = SingletonRequest.getInstance(VerificarCuentaActivity.this).getRequestQueue();
 
@@ -105,11 +107,14 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
             if(inputCode.getText().toString().trim().isEmpty()) {
                 inputCode.setError("El campo código es obligatorio");
             } else {
-                getUrlSigned();
-
                 if(newUrl != null)
                 sendCode();
             }
+        }
+
+        if(view.getId() == R.id.btnVerfie)
+        {
+            getUrlSigned();
         }
     }
 }
