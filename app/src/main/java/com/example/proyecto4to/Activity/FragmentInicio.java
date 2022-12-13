@@ -23,7 +23,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Adaptadores.AdafruitFeedAdapter;
+import com.example.proyecto4to.Graphics.ChartIR;
 import com.example.proyecto4to.Graphics.LineDistancia;
+import com.example.proyecto4to.Graphics.LinePolvo;
+import com.example.proyecto4to.Graphics.PieTemp;
 import com.example.proyecto4to.Modelos.AdafruitFeed;
 import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
@@ -121,7 +124,7 @@ public class FragmentInicio extends Fragment {
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), LineDistancia.class));
+                startActivity(new Intent(v.getContext(), PieTemp.class));
             }
         });
 
@@ -137,7 +140,7 @@ public class FragmentInicio extends Fragment {
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), LineDistancia.class));
+                startActivity(new Intent(v.getContext(), ChartIR.class));
             }
         });
 
@@ -145,7 +148,7 @@ public class FragmentInicio extends Fragment {
         d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), LineDistancia.class));
+                startActivity(new Intent(v.getContext(), LinePolvo.class));
             }
         });
         nQueue = SingletonRequest.getInstance(view.getContext()).getRequestQueue();
