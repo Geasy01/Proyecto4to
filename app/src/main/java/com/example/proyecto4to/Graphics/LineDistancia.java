@@ -114,7 +114,6 @@ public class LineDistancia extends AppCompatActivity  {
                 final Gson gson = new Gson();
                 final Distancia distancia = gson.fromJson(response.toString(), Distancia.class);
                 irval = distancia.getValue();
-                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
                 Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
                 grafica();

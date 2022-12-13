@@ -114,7 +114,6 @@ public class ChartIR extends AppCompatActivity  {
                 final Gson gson = new Gson();
                 final IR ir = gson.fromJson(response.toString(), IR.class);
                 irval = ir.getValue();
-                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
                 Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
                 grafica();

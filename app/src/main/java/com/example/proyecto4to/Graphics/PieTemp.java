@@ -117,7 +117,6 @@ public class PieTemp extends AppCompatActivity {
                 final Gson gson = new Gson();
                 final Temp temp = gson.fromJson(response.toString(), Temp.class);
                 irval = temp.getValue();
-                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
                 Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
                 grafica();

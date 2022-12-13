@@ -118,7 +118,6 @@ public class LinePolvo extends AppCompatActivity {
                 final Gson gson = new Gson();
                 final Polvo polvo = gson.fromJson(response.toString(), Polvo.class);
                 irval = polvo.getValue();
-                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
                 Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
                 grafica();
