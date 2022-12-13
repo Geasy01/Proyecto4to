@@ -104,17 +104,17 @@ public class VerificarCuentaActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnSendCode) {
-            if(inputCode.getText().toString().trim().isEmpty()) {
-                inputCode.setError("El campo código es obligatorio");
-            } else {
-                if(newUrl != null)
+                getUrlSigned();
+            }
+
+        if(view.getId() == R.id.btnVerfie) {
+            if(newUrl != null) {
                 sendCode();
             }
-        }
 
-        if(view.getId() == R.id.btnVerfie)
-        {
-            getUrlSigned();
+            else {
+                Toast.makeText(getApplicationContext(), "Por favor, presiona el botón de enviar código.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
