@@ -21,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Activity.LoginActivity;
 import com.example.proyecto4to.Modelos.Distancia;
 import com.example.proyecto4to.Modelos.DistanciaData;
 import com.example.proyecto4to.Otros.SingletonRequest;
@@ -42,6 +43,7 @@ import com.github.mikephil.charting.utils.Utils;
 import com.example.proyecto4to.Otros.MyMarketView;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -53,18 +55,20 @@ import java.util.Map;
 public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
 
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String SESSION_KEY = "session";
+    private static final String TOKEN_KEY = "token";
+    private static final String IO_USERNAME_KEY = "iousername";
+
     private LineChart chart;
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
-
-    private static final String USER_PREFERENCES = "userPreferences";
-    private static final String TOKEN_KEY = "token";
     private RequestQueue nQueue;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
     ArrayList<Distancia> Value;
     String token;
-    Integer distanciaVal;
+    ArrayList<DistanciaData> distanciaVal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,14 +193,15 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
     }
     private void setData(int count, float range) {
 
-        String url = "https://cleanbotapi.live/api/v1/feeds/distancia";
+        String url = "https://cleanbotapi.live/api/v1/feed/distancia";
 
         final JsonObjectRequest getData = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.i("respuesta", response.toString());
                 final Gson gson = new Gson();
                 final Distancia distancia = gson.fromJson(response.toString(), Distancia.class);
-              ArrayList<DistanciaData> distanciaVal = distancia.getListDistanciaData();
+                distanciaVal = distancia.getListDistanciaData();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -213,13 +218,19 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
             }
         };
         nQueue.add(getData);
+        JSONObject jsonBody = new JSONObject();
 
+        try {
+            jsonBody.put("resultado", distanciaVal);
+        }
+
+        catch (JSONException e) {
+
+        }
         LineDataSet set1;
-        ArrayList<Entry> values = new ArrayList<>();
+        ArrayList<Entry> values = (ArrayList<Entry>) distanciaVal.clone();
 
-        for(int i = 0; i < 10; i++)
-        {
-            values.add(new Entry(i, distanciaVal,getResources().getDrawable(R.drawable.star)));
+        for (int i = 0; i < 10; i++) {
         }
 
         if (chart.getData() != null &&
