@@ -1,84 +1,181 @@
 package com.example.proyecto4to.Graphics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import android.os.Bundle;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
-import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.models.PieModel;
+
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.proyecto4to.Modelos.Distancia;
+import com.example.proyecto4to.Modelos.DistanciaData;
+import com.example.proyecto4to.Modelos.Temp;
+import com.example.proyecto4to.Modelos.TempData;
+import com.example.proyecto4to.Otros.SingletonRequest;
+import com.example.proyecto4to.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.Utils;
+import com.example.proyecto4to.Otros.MyMarketView;
+import com.google.gson.Gson;
+import com.example.proyecto4to.Modelos.IR;
+import com.example.proyecto4to.Modelos.IRData;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import java.util.List;
+import java.util.Map;
 import com.example.proyecto4to.R;
+
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.LineChartView;
 
 public class PieTemp extends AppCompatActivity {
 
-    TextView tvR, tvPython, tvCPP, tvJava;
-    PieChart pieChart;
+    private static final String USER_PREFERENCES = "userPreferences";
+    private static final String TOKEN_KEY = "token";
+    private RequestQueue nQueue;
+    LineChartView lineChartView;
+    SharedPreferences userPreferences;
+    SharedPreferences.Editor userEditor;
+
+    String token = null;
+    String irval;
+    Integer Value;
+
+    String[] axisData = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
+    List<Integer> yAxisData = new ArrayList<>();
+
+    private final int TIEMPO = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pie_temp);
-        tvR = findViewById(R.id.tvR);
-        tvPython = findViewById(R.id.tvPython);
-        tvCPP = findViewById(R.id.tvCPP);
-        tvJava = findViewById(R.id.tvJava);
-        pieChart = findViewById(R.id.piechart);
+        nQueue = SingletonRequest.getInstance(PieTemp.this).getRequestQueue();
+        lineChartView = findViewById(R.id.chart);
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
+        Value = 0;
+        yAxisData.add(Value);
+        getData();
 
-        // Creating a method setData()
-        // to set the text in text view and pie chart
-        setData();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                getData();
+
+                handler.postDelayed(this, TIEMPO);
+            }
+
+        }, TIEMPO);
     }
 
-    private void setData()
-    {
+    public void getData() {
+        String url = "https://cleanbotapi.live/api/v1/feed/temperatura";
+        final JsonObjectRequest getData = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                final Gson gson = new Gson();
+                final Temp temp = gson.fromJson(response.toString(), Temp.class);
+                irval = temp.getValue();
+                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
+                Value = Integer.parseInt(irval);
+                yAxisData.add(Value);
+                grafica();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("errorPeticion", error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
 
-        // Set the percentage of language used
-        tvR.setText(Integer.toString(40));
-        tvPython.setText(Integer.toString(30));
-        tvCPP.setText(Integer.toString(5));
-        tvJava.setText(Integer.toString(25));
+        nQueue.add(getData);
+    }
 
-        // Set the data and color to the pie chart
-        pieChart.addPieSlice(
-                new PieModel(
-                        "R",
-                        Integer.parseInt(tvR.getText().toString()),
-                        Color.parseColor("#FFA726")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Python",
-                        Integer.parseInt(tvPython.getText().toString()),
-                        Color.parseColor("#66BB6A")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "C++",
-                        Integer.parseInt(tvCPP.getText().toString()),
-                        Color.parseColor("#EF5350")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Java",
-                        Integer.parseInt(tvJava.getText().toString()),
-                        Color.parseColor("#29B6F6")));
+    public void grafica() {
+        List yAxisValues = new ArrayList();
+        List axisValues = new ArrayList();
 
-        // To animate the pie chart
-        pieChart.startAnimation();
+        Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
+
+        for (int i = 0; i < axisData.length; i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
+        }
+
+        for (int i = 0; i < yAxisData.size(); i++) {
+            yAxisValues.add(new PointValue(i, yAxisData.get(i)));
+        }
+
+        List lines = new ArrayList();
+        lines.add(line);
+
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+        Axis axis = new Axis();
+        axis.setValues(axisValues);
+        axis.setTextSize(16);
+        axis.setTextColor(Color.parseColor("#03A9F4"));
+        data.setAxisXBottom(axis);
+
+        Axis yAxis = new Axis();
+        yAxis.setName("Sales in millions");
+        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setTextSize(16);
+        data.setAxisYLeft(yAxis);
+
+        lineChartView.setLineChartData(data);
+        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
+        viewport.top = 110;
+        lineChartView.setMaximumViewport(viewport);
+        lineChartView.setCurrentViewport(viewport);
     }
 }
