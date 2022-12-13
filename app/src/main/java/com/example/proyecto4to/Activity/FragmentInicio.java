@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.proyecto4to.Adaptadores.AdafruitFeedAdapter;
+import com.example.proyecto4to.Graphics.LineDistancia;
 import com.example.proyecto4to.Modelos.AdafruitFeed;
 import com.example.proyecto4to.Otros.SingletonRequest;
 import com.example.proyecto4to.R;
@@ -41,7 +43,7 @@ import java.util.Map;
 public class FragmentInicio extends Fragment {
     Button btnControlar, btnAddFeed;
     View view;
-    String temperatura, distancia, infrarrojo, polvo;
+    TextView a, b, c, d;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -115,6 +117,37 @@ public class FragmentInicio extends Fragment {
             }
         });
 
+        a = view.findViewById(R.id.a);
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), LineDistancia.class));
+            }
+        });
+
+        b = view.findViewById(R.id.b);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), LineDistancia.class));
+            }
+        });
+
+        c = view.findViewById(R.id.c);
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), LineDistancia.class));
+            }
+        });
+
+        d = view.findViewById(R.id.d);
+        d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), LineDistancia.class));
+            }
+        });
         nQueue = SingletonRequest.getInstance(view.getContext()).getRequestQueue();
         adF = new ArrayList<>();
         userPreferences = view.getContext().getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
@@ -139,10 +172,6 @@ public class FragmentInicio extends Fragment {
                 final Gson gson = new Gson();
                 final AdafruitFeed adafruitFeed = gson.fromJson(response.toString(), AdafruitFeed.class);
                 adapterFeed = new AdafruitFeedAdapter(adafruitFeed.getListFeedData());
-                temperatura = adafruitFeed.getListFeedData().get(0).getName();
-                distancia = adafruitFeed.getListFeedData().get(1).getName();
-                infrarrojo = adafruitFeed.getListFeedData().get(2).getName();
-                polvo = adafruitFeed.getListFeedData().get(3).getName();
                 recyclerView.setAdapter(adapterFeed);
             }
         }, new Response.ErrorListener() {
