@@ -3,19 +3,18 @@ package com.example.proyecto4to.Modelos;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Distancia {
 
     private final int status;
     private final String message;
+    private String value;
 
-    @SerializedName("data")
-    private final ArrayList<DistanciaData> ListDistanciaData;
-
-    public Distancia(int status, String message, ArrayList<DistanciaData> listDistanciaData) {
+    public Distancia(int status, String message, String value) {
         this.status = status;
         this.message = message;
-        ListDistanciaData = listDistanciaData;
+        this.value = value;
     }
 
     public int getStatus() {
@@ -26,8 +25,7 @@ public class Distancia {
         return message;
     }
 
-
-    public ArrayList<DistanciaData> getListDistanciaData() {
-        return ListDistanciaData;
+    public String getValue() {
+        return value;
     }
 }

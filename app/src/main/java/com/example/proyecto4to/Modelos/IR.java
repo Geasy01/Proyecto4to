@@ -8,13 +8,12 @@ public class IR {
     private final int status;
     private final String message;
 
-    @SerializedName("data")
-    private final ArrayList<IRData> ListIRData;
+    private String value;
 
-    public IR(int status, String message, ArrayList<IRData> listIRData) {
+    public IR(int status, String message, String value) {
         this.status = status;
         this.message = message;
-        ListIRData = listIRData;
+        this.value = value;
     }
 
     public int getStatus() {
@@ -25,7 +24,7 @@ public class IR {
         return message;
     }
 
-    public ArrayList<IRData> getListIRData() {
-        return ListIRData;
+    public String getValue() {
+        return value;
     }
 }

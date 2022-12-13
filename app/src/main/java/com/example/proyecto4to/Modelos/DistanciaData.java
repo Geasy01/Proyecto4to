@@ -2,13 +2,13 @@ package com.example.proyecto4to.Modelos;
 
 public class DistanciaData {
 
-    private final int value;
+    private final String value;
 
-    public DistanciaData(int value){
+    public DistanciaData(String value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 }

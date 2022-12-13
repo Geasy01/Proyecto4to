@@ -3,6 +3,7 @@ package com.example.proyecto4to.Graphics;
 import  androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -53,34 +54,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeListener,
-        OnChartValueSelectedListener {
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.LineChartView;
+
+public class LineDistancia extends AppCompatActivity {
 
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String SESSION_KEY = "session";
     private static final String TOKEN_KEY = "token";
     private static final String IO_USERNAME_KEY = "iousername";
-
-    private LineChart chart;
-    private SeekBar seekBarX, seekBarY;
-    private TextView tvX, tvY;
     private RequestQueue nQueue;
     private final int TIEMPO = 5000;
     int i = 1;
+    LineChartView lineChartView;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
-    ArrayList<Distancia> Value;
-    String token;
-    ArrayList<DistanciaData> distanciaVal;
+    Integer Value;
+    String token, value;
+
+    String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
+            "Oct", "Nov", "Dec"};
+    List <Integer> yAxisData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_distancia);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final Handler handler = new Handler();
+        /*final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
 
@@ -91,132 +97,21 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
                 handler.postDelayed(this, TIEMPO);
             }
 
-        }, TIEMPO);
+        }, TIEMPO);*/
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
         nQueue = SingletonRequest.getInstance(LineDistancia.this).getRequestQueue();
-
-        tvX = findViewById(R.id.tvXMax);
-        tvY = findViewById(R.id.tvYMax);
-
-        seekBarX = findViewById(R.id.seekBar1);
-        seekBarX.setOnSeekBarChangeListener(this);
-
-        seekBarY = findViewById(R.id.seekBar2);
-        seekBarY.setMax(180);
-        seekBarY.setOnSeekBarChangeListener(this);
-
-
-        {   // // Chart Style // //
-            chart = findViewById(R.id.chart1);
-
-            // background color
-            chart.setBackgroundColor(Color.WHITE);
-
-            // disable description text
-            chart.getDescription().setEnabled(false);
-
-            // enable touch gestures
-            chart.setTouchEnabled(true);
-
-            // set listeners
-            chart.setOnChartValueSelectedListener(this);
-            chart.setDrawGridBackground(false);
-
-            // create marker to display box when values are selected
-            MyMarketView mv = new MyMarketView(this, R.layout.custom_marker_view);
-
-            // Set the marker to the chart
-            mv.setChartView(chart);
-            chart.setMarker(mv);
-
-            // enable scaling and dragging
-            chart.setDragEnabled(true);
-            chart.setScaleEnabled(true);
-            // chart.setScaleXEnabled(true);
-            // chart.setScaleYEnabled(true);
-
-            // force pinch zoom along both axis
-            chart.setPinchZoom(true);
-        }
-
-        XAxis xAxis;
-        {   // // X-Axis Style // //
-            xAxis = chart.getXAxis();
-
-            // vertical grid lines
-            xAxis.enableGridDashedLine(10f, 10f, 0f);
-        }
-
-        YAxis yAxis;
-        {   // // Y-Axis Style // //
-            yAxis = chart.getAxisLeft();
-
-            // disable dual axis (only use LEFT axis)
-            chart.getAxisRight().setEnabled(false);
-
-            // horizontal grid lines
-            yAxis.enableGridDashedLine(10f, 10f, 0f);
-
-            // axis range
-            yAxis.setAxisMaximum(200f);
-            yAxis.setAxisMinimum(-50f);
-        }
-
-
-        {   // // Create Limit Lines // //
-            LimitLine llXAxis = new LimitLine(9f, "Index 10");
-            llXAxis.setLineWidth(4f);
-            llXAxis.enableDashedLine(10f, 10f, 0f);
-            llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            llXAxis.setTextSize(10f);
-
-            LimitLine ll1 = new LimitLine(150f, "Upper Limit");
-            ll1.setLineWidth(4f);
-            ll1.enableDashedLine(10f, 10f, 0f);
-            ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-            ll1.setTextSize(10f);
-
-            LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
-            ll2.setLineWidth(4f);
-            ll2.enableDashedLine(10f, 10f, 0f);
-            ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-            ll2.setTextSize(10f);
-
-            // draw limit lines behind data instead of on top
-            yAxis.setDrawLimitLinesBehindData(true);
-            xAxis.setDrawLimitLinesBehindData(true);
-
-            // add limit lines
-            yAxis.addLimitLine(ll1);
-            yAxis.addLimitLine(ll2);
-            //xAxis.addLimitLine(llXAxis);
-        }
-
-        // add data
-        seekBarX.setProgress(45);
-        seekBarY.setProgress(180);
-        setData(45, 180);
-
-        // draw points over time
-        chart.animateX(1500);
-
-        // get the legend (only possible after setting data)
-        Legend l = chart.getLegend();
-
-        // draw legend entries as lines
-        l.setForm(Legend.LegendForm.LINE);
-    }
-    private void setData(int count, float range) {
-
         String url = "https://cleanbotapi.live/api/v1/feed/distancia";
 
         final JsonObjectRequest getData = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("respuesta", response.toString());
                 final Gson gson = new Gson();
                 final Distancia distancia = gson.fromJson(response.toString(), Distancia.class);
-                distanciaVal = distancia.getListDistanciaData();
-                Log.i("distsncia", String.valueOf(distanciaVal));
+                value = distancia.getValue();
+                Value = Integer.parseInt(value);
+                yAxisData.add(Value);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -228,110 +123,49 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
-                headers.put("Authorization", "Bearer " +token);
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };
         nQueue.add(getData);
-        LineDataSet set1;
-        ArrayList<Entry> values = (ArrayList<Entry>) distanciaVal.clone();
+        lineChartView = findViewById(R.id.chart);
 
-        for (int i = 0; i < 10; i++) {
+        List yAxisValues = new ArrayList();
+        List axisValues = new ArrayList();
+
+
+        Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
+
+        for (int i = 0; i < axisData.length; i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
         }
 
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            set1.notifyDataSetChanged();
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
-            // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet 1");
-
-            set1.setDrawIcons(false);
-
-            // draw dashed line
-            set1.enableDashedLine(10f, 5f, 0f);
-
-            // black lines and points
-            set1.setColor(Color.BLACK);
-            set1.setCircleColor(Color.BLACK);
-
-            // line thickness and point size
-            set1.setLineWidth(1f);
-            set1.setCircleRadius(3f);
-
-            // draw points as solid circles
-            set1.setDrawCircleHole(false);
-
-            // customize legend entry
-            set1.setFormLineWidth(1f);
-            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
-            set1.setFormSize(15.f);
-
-            // text size of values
-            set1.setValueTextSize(9f);
-
-            // draw selection line as dashed
-            set1.enableDashedHighlightLine(10f, 5f, 0f);
-
-            // set the filled area
-            set1.setDrawFilled(true);
-            set1.setFillFormatter(new IFillFormatter() {
-                @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return chart.getAxisLeft().getAxisMinimum();
-                }
-            });
-
-            // set color of filled area
-            if (Utils.getSDKInt() >= 18) {
-                // drawables only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
-                set1.setFillDrawable(drawable);
-            } else {
-                set1.setFillColor(Color.BLACK);
-            }
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1); // add the data sets
-
-            // create a data object with the data sets
-            LineData data = new LineData(dataSets);
-
-            // set data
-            chart.setData(data);
+        for (int i = 0; i < yAxisData.size(); i++) {
+            yAxisValues.add(new PointValue(i, yAxisData.get(i)));
         }
-    }
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        tvX.setText(String.valueOf(seekBarX.getProgress()));
-        tvY.setText(String.valueOf(seekBarY.getProgress()));
+        List lines = new ArrayList();
+        lines.add(line);
 
-        setData(seekBarX.getProgress(), seekBarY.getProgress());
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
 
-        // redraw
-        chart.invalidate();
-    }
+        Axis axis = new Axis();
+        axis.setValues(axisValues);
+        axis.setTextSize(16);
+        axis.setTextColor(Color.parseColor("#03A9F4"));
+        data.setAxisXBottom(axis);
 
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
+        Axis yAxis = new Axis();
+        yAxis.setName("Sales in millions");
+        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setTextSize(16);
+        data.setAxisYLeft(yAxis);
 
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
-
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
-        Log.i("Entry selected", e.toString());
-        Log.i("LOW HIGH", "low: " + chart.getLowestVisibleX() + ", high: " + chart.getHighestVisibleX());
-        Log.i("MIN MAX", "xMin: " + chart.getXChartMin() + ", xMax: " + chart.getXChartMax() + ", yMin: " + chart.getYChartMin() + ", yMax: " + chart.getYChartMax());
-    }
-
-    @Override
-    public void onNothingSelected() {
-        Log.i("Nothing selected", "Nothing selected.");
+        lineChartView.setLineChartData(data);
+        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
+        viewport.top = 110;
+        lineChartView.setMaximumViewport(viewport);
+        lineChartView.setCurrentViewport(viewport);
     }
 }

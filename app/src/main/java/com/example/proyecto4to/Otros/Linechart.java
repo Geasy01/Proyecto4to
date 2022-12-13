@@ -32,7 +32,7 @@ public class Linechart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_chart);
 
-        lineChartView = findViewById(R.id.chart);
+        lineChartView = findViewById(R.id.chart131);
 
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();

@@ -1,13 +1,13 @@
 package com.example.proyecto4to.Modelos;
 
 public class IRData {
-    private final int value;
+    private final String value;
 
-    public IRData(int value){
+    public IRData(String value){
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 }
