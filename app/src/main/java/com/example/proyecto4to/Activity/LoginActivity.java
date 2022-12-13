@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(view.getId() == R.id.textViewSignUp)
-        startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
     }
 
     public boolean checkSession() {

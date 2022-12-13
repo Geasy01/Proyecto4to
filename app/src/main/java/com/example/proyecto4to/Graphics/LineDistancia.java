@@ -1,6 +1,6 @@
 package com.example.proyecto4to.Graphics;
 
-import  androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,7 +24,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.proyecto4to.Activity.LoginActivity;
 import com.example.proyecto4to.Modelos.Distancia;
 import com.example.proyecto4to.Modelos.DistanciaData;
 import com.example.proyecto4to.Otros.SingletonRequest;
@@ -44,8 +44,9 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Utils;
 import com.example.proyecto4to.Otros.MyMarketView;
 import com.google.gson.Gson;
+import com.example.proyecto4to.Modelos.IR;
+import com.example.proyecto4to.Modelos.IRData;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ import java.util.HashMap;
 
 import java.util.List;
 import java.util.Map;
+import com.example.proyecto4to.R;
 
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -62,56 +64,60 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class LineDistancia extends AppCompatActivity {
+public class LineDistancia extends AppCompatActivity  {
 
     private static final String USER_PREFERENCES = "userPreferences";
-    private static final String SESSION_KEY = "session";
     private static final String TOKEN_KEY = "token";
-    private static final String IO_USERNAME_KEY = "iousername";
     private RequestQueue nQueue;
-    private final int TIEMPO = 5000;
-    int i = 1;
     LineChartView lineChartView;
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
-    Integer Value;
-    String token, value;
 
-    String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-            "Oct", "Nov", "Dec"};
+    String token = null;
+    String irval;
+    Integer Value;
+
+    String[] axisData = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
     List <Integer> yAxisData = new ArrayList<>();
 
+    private final int TIEMPO = 5000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_line_distancia);
+        setContentView(R.layout.activity_chart_ir);
+        nQueue = SingletonRequest.getInstance(LineDistancia.this).getRequestQueue();
+        lineChartView = findViewById(R.id.chart12);
+        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        token = userPreferences.getString(TOKEN_KEY, null);
+        Value = 0;
+        yAxisData.add(Value);
+        getData();
 
-        /*final Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
-            public void run() {
-
-                i++;
-                int line = 45;
-                setData(line-i,180);
+            public void run(){
+                getData();
 
                 handler.postDelayed(this, TIEMPO);
             }
 
-        }, TIEMPO);*/
-        userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
-        userEditor = userPreferences.edit();
-        token = userPreferences.getString(TOKEN_KEY, null);
-        nQueue = SingletonRequest.getInstance(LineDistancia.this).getRequestQueue();
-        String url = "https://cleanbotapi.live/api/v1/feed/distancia";
+        }, TIEMPO);
+    }
 
+    public void getData(){
+        String url = "https://cleanbotapi.live/api/v1/feed/distancia";
         final JsonObjectRequest getData = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
                 final Distancia distancia = gson.fromJson(response.toString(), Distancia.class);
-                value = distancia.getValue();
-                Value = Integer.parseInt(value);
+                irval = distancia.getValue();
+                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
+                Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
+                grafica();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -127,12 +133,14 @@ public class LineDistancia extends AppCompatActivity {
                 return headers;
             }
         };
-        nQueue.add(getData);
-        lineChartView = findViewById(R.id.chart);
 
+        nQueue.add(getData);
+    }
+
+    public void grafica()
+    {
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
-
 
         Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
 

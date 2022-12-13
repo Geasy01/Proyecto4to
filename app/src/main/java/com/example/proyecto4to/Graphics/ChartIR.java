@@ -9,12 +9,14 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -71,16 +73,15 @@ public class ChartIR extends AppCompatActivity  {
     SharedPreferences userPreferences;
     SharedPreferences.Editor userEditor;
 
-
-    String token;
+    String token = null;
     String irval;
     Integer Value;
 
-    String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-            "Oct", "Nov", "Dec"};
+    String[] axisData = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
     List <Integer> yAxisData = new ArrayList<>();
 
-
+    private final int TIEMPO = 5000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,17 +91,33 @@ public class ChartIR extends AppCompatActivity  {
         userPreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         userEditor = userPreferences.edit();
         token = userPreferences.getString(TOKEN_KEY, null);
+        Value = 0;
+        yAxisData.add(Value);
+        getData();
 
-        String url = "https://cleanbotapi.live/api/v1/feeds/infrarrojo";
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run(){
+                getData();
 
+                handler.postDelayed(this, TIEMPO);
+            }
+
+        }, TIEMPO);
+    }
+
+    public void getData(){
+        String url = "https://cleanbotapi.live/api/v1/feed/infrarrojo";
         final JsonObjectRequest getData = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 final Gson gson = new Gson();
                 final IR ir = gson.fromJson(response.toString(), IR.class);
                 irval = ir.getValue();
+                Toast.makeText(getApplicationContext(), "" + irval, Toast.LENGTH_SHORT).show();
                 Value = Integer.parseInt(irval);
                 yAxisData.add(Value);
+                grafica();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -116,11 +133,14 @@ public class ChartIR extends AppCompatActivity  {
                 return headers;
             }
         };
-        nQueue.add(getData);
 
+        nQueue.add(getData);
+    }
+
+    public void grafica()
+    {
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
-
 
         Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
 
