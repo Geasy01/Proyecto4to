@@ -1,6 +1,6 @@
 package com.example.proyecto4to.Graphics;
 
-import androidx.appcompat.app.AppCompatActivity;
+import  androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.SharedPreferences;
@@ -216,6 +216,7 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
                 final Gson gson = new Gson();
                 final Distancia distancia = gson.fromJson(response.toString(), Distancia.class);
                 distanciaVal = distancia.getListDistanciaData();
+                Log.i("distsncia", String.valueOf(distanciaVal));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -232,15 +233,6 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
             }
         };
         nQueue.add(getData);
-        JSONObject jsonBody = new JSONObject();
-
-        try {
-            jsonBody.put("resultado", distanciaVal);
-        }
-
-        catch (JSONException e) {
-
-        }
         LineDataSet set1;
         ArrayList<Entry> values = (ArrayList<Entry>) distanciaVal.clone();
 
