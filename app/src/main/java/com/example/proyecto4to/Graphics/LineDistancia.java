@@ -64,7 +64,7 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
     SharedPreferences.Editor userEditor;
     ArrayList<Distancia> Value;
     String token;
-    Integer distanciaVal = 0;
+    Integer distanciaVal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,6 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
         setContentView(R.layout.activity_line_distancia);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_line_chart);
 
         setTitle("LineChartActivity1");
         nQueue = SingletonRequest.getInstance(LineDistancia.this).getRequestQueue();
@@ -218,7 +217,7 @@ public class LineDistancia extends AppCompatActivity implements OnSeekBarChangeL
         LineDataSet set1;
         ArrayList<Entry> values = new ArrayList<>();
 
-        for(int i = 0; i < count; i++)
+        for(int i = 0; i < 10; i++)
         {
             values.add(new Entry(i, distanciaVal,getResources().getDrawable(R.drawable.star)));
         }
